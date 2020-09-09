@@ -1,0 +1,62 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.container {
+  margin: 0 auto;
+  width: 90vw;
+  display: flex;
+  justify-content: space-between;
+  border: 3px solid $tertiary-color;
+  border-radius: 15px;
+  transition: all 1.3s ease-in-out;
+}
+
+.wrapper {
+  @include flex-vertical-center;
+  padding: 30px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.heading {
+  margin-bottom: 20px;
+  align-self: flex-start;
+}
+
+.paragraph {
+  color: $grey400;
+  align-self: flex-start;
+}
+
+.button {
+  align-self: flex-end;
+  margin: 50px;
+}
+
+.button:hover {
+  box-shadow: 0 0 5px 1px darken($primary-color, 30%);
+  background-color: lighten($primary-color, 5%);
+}
+
+.image {
+  width: 800px;
+  height: 75vh;
+  background-image: url("../../assets/welcomePhoto.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 100px 10px 10px 100px;
+  box-shadow: -15px 0 20px 5px $grey400;
+  transition: transform 1.2s ease-in-out;
+}
+
+.containerOpen {
+  transform: scale(1.1, 1.5);
+}
+
+.wrapperOpen {
+  opacity: 0;
+}
+
+.imageOpen {
+  transform: translate(300vw, 0);
+}

@@ -1,0 +1,18 @@
+@import "../../../scss/variables";
+@import "../../../scss/mixins";
+
+.container {
+  @include flex-horizontal;
+  padding: 20px 60px;
+}
+
+.nav {
+  @include flex-horizontal;
+  list-style-type: none;
+}
+
+.link {
+  padding: 0 45px;
+  color: $secondary-color;
+  font-weight: $semi-bold;
+}
