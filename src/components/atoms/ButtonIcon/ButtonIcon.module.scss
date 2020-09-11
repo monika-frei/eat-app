@@ -1,0 +1,40 @@
+@import "../../../scss/variables";
+
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+}
+
+.icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border-width: 1px;
+  border-style: solid;
+  background-color: #fff;
+  position: relative;
+  box-shadow: 0 0 10px 10px $secondary-color;
+}
+
+div.line:first-of-type {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+}
+div.line:last-of-type {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 50px;
+  border-left-width: 3px;
+  border-left-style: solid;
+}

@@ -1,0 +1,29 @@
+@import "../../../scss/mixins";
+@import "../../../scss/variables";
+
+.container {
+  @include flex-vertical-center;
+  width: 150px;
+  height: 100vh;
+  padding: 20px 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  background-color: #fff;
+  box-shadow: 5px 5px 10px $grey400;
+  justify-content: space-between;
+}
+
+.wrapper {
+  align-self: flex-end;
+}
+
+.link {
+  display: block;
+  padding: 10px 0;
+}
+
+.logout {
+  margin: 0 auto;
+}

@@ -1,0 +1,20 @@
+@import "../../../scss/variables";
+@import "../../../scss/mixins";
+
+.wrapper {
+  @include flex-vertical-center;
+  width: 150px;
+  margin: 10px auto;
+  padding: 10px 0;
+  box-shadow: 5px -5px 15px $grey100;
+}
+
+.heading {
+  color: $primary-color;
+  font-size: $fontSize-m;
+}
+
+.recepie {
+  color: $darkfont;
+  margin: 5px 0;
+}

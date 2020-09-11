@@ -1,0 +1,16 @@
+@import "../../../scss/mixins";
+
+.container {
+  width: 100%;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(180px, 1fr));
+  grid-template-rows: auto;
+  justify-content: center;
+  row-gap: 20px;
+  column-gap: 10px;
+}
+
+.wrapper {
+  align-self: center;
+}
