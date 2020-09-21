@@ -3,12 +3,13 @@
 .container {
   width: 100%;
   margin-top: 50px;
+  padding: 0 20px;
   display: grid;
-  grid-template-columns: repeat(5, minmax(180px, 1fr));
+  grid-template-columns: repeat(3, minmax(300px, 1fr));
   grid-template-rows: auto;
   justify-content: center;
   row-gap: 20px;
-  column-gap: 10px;
+  column-gap: 20px;
 }
 
 .wrapper {

@@ -9,6 +9,17 @@
   border-radius: 20px 0 0 20px;
   border-width: 1px;
   border-style: solid;
-  background-color: transparent;
   cursor: pointer;
+}
+
+.bgPlan {
+  background-color: $secondary-color;
+}
+
+.bgRecepies {
+  background-color: $primary-color;
+}
+
+.bgGrocerylist {
+  background-color: $tertiary-color;
 }

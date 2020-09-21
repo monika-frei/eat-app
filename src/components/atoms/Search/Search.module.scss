@@ -1,0 +1,12 @@
+@import "../../../scss/variables";
+
+.input {
+  width: 400px;
+  font-size: $fontSize-m;
+  display: block;
+  padding: 15px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}

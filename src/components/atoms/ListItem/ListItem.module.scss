@@ -1,0 +1,25 @@
+@import "../../../scss//variables";
+
+.button {
+  width: 25px;
+  height: 25px;
+  border: 1px solid $darkfont;
+  border-radius: 50%;
+}
+
+.item {
+  padding: 5px 0;
+  border-bottom: 1px solid $darkfont;
+  display: grid;
+  grid-template-columns: 50px auto 100px;
+  grid-template-rows: auto;
+}
+
+.title {
+  list-style-type: none;
+  color: $darkfont;
+}
+
+.amount {
+  justify-self: end;
+}

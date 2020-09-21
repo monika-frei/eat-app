@@ -27,6 +27,13 @@ a {
   }
 }
 
+button {
+  background-color: transparent;
+  border: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
 .bgPrimary {
   background-color: $primary-color;
 }
@@ -38,6 +45,9 @@ a {
 .bgTertiary {
   background-color: $tertiary-color;
 }
+.bgWhite {
+  background-color: #fff;
+}
 
 .borderPrimary {
   border-color: $primary-color;
@@ -48,4 +58,31 @@ a {
 }
 .borderTertiary {
   border-color: $tertiary-color;
+}
+.borderGrey {
+  border-color: $darkfont;
+}
+.borderWhite {
+  border-color: #fff;
+}
+
+.activeForm {
+  transform: translateX(100%);
+}
+
+.buttonDelete {
+  background-image: url("./assets/close.png");
+}
+.buttonAdd {
+  background-image: url("./assets/add.png");
+}
+
+.btn20 {
+  width: 20px;
+  height: 20px;
+}
+
+.btn30 {
+  width: 30px;
+  height: 30px;
 }

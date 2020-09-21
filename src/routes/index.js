@@ -4,5 +4,5 @@ export const routes = {
   signup: "/signup",
   plan: "/plan",
   recepies: "/recepies",
-  list: "/shoppinglist",
+  list: "/grocerylist",
 };
