@@ -1,0 +1,59 @@
+@import "../../scss/mixins";
+@import "../../scss/variables";
+
+.wrapper {
+  @include flex-vertical-center;
+  height: 100%;
+  min-height: 80vh;
+}
+
+.heading {
+  text-align: center;
+  color: $darkfont;
+}
+
+.buttons {
+  @include flex-horizontal;
+  padding: 10px 30px;
+  margin: 30px 0;
+}
+
+.button {
+  margin-right: 50px;
+  position: relative;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 6px darken($primary-color, 10%);
+
+  &:hover {
+    box-shadow: 0 4px darken($primary-color, 10%);
+    top: 3px;
+  }
+  &:active {
+    box-shadow: 0 0 darken($primary-color, 10%);
+    top: 6px;
+  }
+}
+
+.buttonWrapper {
+  position: fixed;
+  right: 50px;
+  top: 50px;
+}
+
+.buttonAdd {
+  position: relative;
+
+  &:hover {
+    background-color: darken($primary-color, 5%);
+    top: 3px;
+  }
+  &:active {
+    top: 6px;
+  }
+}
+
+.input {
+  align-self: center;
+  background-color: lighten($primary-color, 10%);
+}

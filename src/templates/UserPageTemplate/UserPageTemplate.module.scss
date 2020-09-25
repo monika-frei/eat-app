@@ -1,0 +1,23 @@
+@import "../../scss/variables";
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 10px 10px 10px 0;
+}
+.card {
+  width: 100%;
+  height: 100%;
+  box-shadow: 5px 5px 10px $grey400;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 0 10px 10px 0;
+}
+.wrapper {
+  padding: 50px 0 50px 180px;
+}
+
+.heading {
+  text-align: center;
+  color: $darkfont;
+  transform: translateX(-30px);
+}

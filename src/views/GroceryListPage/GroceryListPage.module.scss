@@ -1,0 +1,26 @@
+@import "../../scss/mixins";
+@import "../../scss/variables";
+
+.wrapper {
+  @include flex-vertical-center;
+  min-height: 80vh;
+}
+
+.buttons {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+}
+
+.button {
+  margin-left: 10px;
+  position: relative;
+
+  &:hover {
+    background-color: darken($tertiary-color, 5%);
+    top: 3px;
+  }
+  &:active {
+    top: 6px;
+  }
+}

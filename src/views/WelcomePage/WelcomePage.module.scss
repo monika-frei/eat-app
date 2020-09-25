@@ -8,7 +8,8 @@
   justify-content: space-between;
   border: 3px solid $tertiary-color;
   border-radius: 15px;
-  transition: all 1.3s ease-in-out;
+  transition: all 0.8s;
+  transition-timing-function: cubic-bezier(0.43, 0.13, 0.23, 0.96);
 }
 
 .wrapper {
@@ -46,11 +47,12 @@
   background-repeat: no-repeat;
   border-radius: 100px 10px 10px 100px;
   box-shadow: -15px 0 20px 5px $grey400;
-  transition: transform 1.2s ease-in-out;
+  transition: transform 0.7s;
+  transition-timing-function: cubic-bezier(0.43, 0.13, 0.23, 0.96);
 }
 
 .containerOpen {
-  transform: scale(1.1, 1.5);
+  transform: scale(0.5, 1);
 }
 
 .wrapperOpen {

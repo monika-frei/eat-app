@@ -2,14 +2,14 @@ import React from "react";
 import styles from "./WelcomeNavigation.module.scss";
 import { NavLink } from "react-router-dom";
 import Logo from "../../atoms/Logo/Logo";
-import { motion, transform } from "framer-motion";
+import { motion } from "framer-motion";
 
-const transition = { duration: 1.3, ease: [0.43, 0.13, 0.23, 0.96] };
+const transition = { duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] };
 
 const WelcomeNavigation = () => {
   return (
     <motion.div
-      exit={{ opacity: 0 }}
+      exit={{ opacity: 1 }}
       transition={transition}
       className={styles.container}
     >
@@ -17,10 +17,10 @@ const WelcomeNavigation = () => {
       <nav>
         <ul className={styles.nav}>
           <li className={styles.link}>
-            <NavLink to="">Join</NavLink>
+            <NavLink to="/signup">Join</NavLink>
           </li>
           <li className={styles.link}>
-            <NavLink to="">Log in</NavLink>
+            <NavLink to="/login">Log in</NavLink>
           </li>
         </ul>
       </nav>

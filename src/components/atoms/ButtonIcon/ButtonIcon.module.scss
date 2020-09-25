@@ -1,0 +1,32 @@
+@import "../../../scss/variables";
+
+.button {
+  width: 80px;
+  height: 80px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.icon {
+  position: relative;
+}
+
+div.line:first-of-type {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+}
+div.line:last-of-type {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 50px;
+  border-left-width: 3px;
+  border-left-style: solid;
+}

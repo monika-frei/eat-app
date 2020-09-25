@@ -1,0 +1,31 @@
+@import "../../../scss/mixins";
+@import "../../../scss/variables";
+
+.container {
+  @include flex-vertical-center;
+  padding-bottom: 10px;
+  background-color: lighten($secondary-color, 35%);
+  box-shadow: 5px 5px 0 lighten($secondary-color, 10%);
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 15px 20px;
+}
+
+.heading {
+  width: 100%;
+  font-size: $fontSize-l;
+  color: $darkfont;
+  font-weight: $semi-bold;
+  text-transform: uppercase;
+  align-self: center;
+}
+
+.button {
+  align-self: flex-end;
+  background-repeat: no-repeat;
+}
