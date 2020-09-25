@@ -155,6 +155,25 @@ const rootReducer = (state = initialState, action) => {
           },
         },
       };
+    case "QUICK_ADD":
+      return {
+        ...state,
+        plan: {
+          ...state.plan,
+          [action.payload.day]: {
+            ...state.plan[action.payload.day],
+            [action.payload.meal]: [
+              ...state.plan[action.payload.day][action.payload.meal],
+              action.payload.recepie,
+            ],
+          },
+        },
+      };
+    case "CREATE_RECEPIE":
+      return {
+        ...state,
+        recepies: [...state.recepies, action.payload.recepie],
+      };
     default:
       return state;
   }

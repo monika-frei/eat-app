@@ -7,7 +7,7 @@ import GroceryList from "../../components/organisms/GroceryList/GroceryList";
 
 const GroceryListPage = () => {
   return (
-    <UserPageTemplate border="borderTertiary">
+    <UserPageTemplate border="borderTertiary" bgColorLight="bgTertiaryLight">
       <div className={styles.wrapper}>
         <GroceryList />
         <div className={styles.buttons}>

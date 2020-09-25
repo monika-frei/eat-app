@@ -5,7 +5,14 @@ import cx from "classnames";
 const Search = ({ custom, onChange }) => {
   const inputClass = cx(styles.input, custom);
 
-  return <input className={inputClass} type="text" onChange={onChange}></input>;
+  return (
+    <input
+      className={inputClass}
+      type="text"
+      onChange={onChange}
+      placeholder="what do you wan to eat?"
+    ></input>
+  );
 };
 
 export default Search;

@@ -48,11 +48,13 @@ const Sidebar = ({ pageType }) => {
               </SidebarButton>
             </NavLink>
           </li>
+          <li className={styles.link}>
+            <NavLink to="/grocerylist">
+              <SidebarButton border="borderGrey">Log out</SidebarButton>
+            </NavLink>
+          </li>
         </ul>
       </nav>
-      <NavLink to="">
-        <h3 className={styles.logout}> Log out </h3>
-      </NavLink>
     </motion.div>
   );
 };

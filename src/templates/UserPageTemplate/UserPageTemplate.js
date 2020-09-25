@@ -6,21 +6,23 @@ import PageType from "../../providers/PageType";
 
 import cx from "classnames";
 
-const UserPageTemplate = ({ children, bgColor, border }, props) => {
+const UserPageTemplate = ({ children, bgColor, border, bgColorLight }) => {
   const cardClass = cx(styles.card, bgColor, border);
+  const containerClass = cx(styles.container);
+  const wrapperClass = cx(styles.wrapper, border, bgColorLight);
   return (
     <PageType
       render={(type) => (
-        <div className={styles.container}>
+        <div className={containerClass}>
           <div className={cardClass}>
             <Sidebar pageType={type} />
-            <div className={styles.wrapper}>
+            <div className={wrapperClass}>
               <Heading custom={styles.heading}>
-                {type === "plan" && "Weekly plan"}
+                {type === "plan" && "Plan"}
                 {type === "recepies" && "Recepies"}
                 {type === "grocerylist" && "Grocery list"}
               </Heading>
-              {children}
+              <div className={styles.page}>{children}</div>
             </div>
           </div>
         </div>
