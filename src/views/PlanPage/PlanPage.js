@@ -26,7 +26,10 @@ const PlanPage = (props) => {
             setSavedRecepies,
             handleEdit,
           }) => (
-            <UserPageTemplate {...props} border="borderSecondary">
+            <UserPageTemplate
+              bgColorLight="bgSecondaryLight"
+              border="borderSecondary"
+            >
               <div className={styles.wrapper}>
                 <WeekPlan toggle={toggle} handleEdit={handleEdit} />
                 <div className={styles.buttonWrapper}>

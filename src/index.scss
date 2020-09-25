@@ -34,16 +34,30 @@ button {
   cursor: pointer;
 }
 
+li {
+  list-style-type: none;
+}
+
 .bgPrimary {
   background-color: $primary-color;
+}
+
+.bgPrimaryLight {
+  background-color: lighten($primary-color, 20%);
 }
 
 .bgSecondary {
   background-color: $secondary-color;
 }
+.bgSecondaryLight {
+  background-color: lighten($secondary-color, 40%);
+}
 
 .bgTertiary {
   background-color: $tertiary-color;
+}
+.bgTertiaryLight {
+  background-color: lighten($tertiary-color, 20%);
 }
 .bgWhite {
   background-color: #fff;
@@ -60,14 +74,14 @@ button {
   border-color: $tertiary-color;
 }
 .borderGrey {
-  border-color: $darkfont;
+  border-color: lighten($darkfont, 60%);
 }
 .borderWhite {
   border-color: #fff;
 }
 
 .activeForm {
-  transform: translateX(100%);
+  transform: translateX(-101%);
 }
 
 .buttonDelete {
@@ -75,6 +89,9 @@ button {
 }
 .buttonAdd {
   background-image: url("./assets/add.png");
+}
+.buttonEdit {
+  background-image: url("./assets/edit-button.png");
 }
 
 .btn20 {

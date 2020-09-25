@@ -78,7 +78,6 @@ export const recepies = [
       { title: "egg", amount: "1", unit: "" },
       { title: "onion", amount: "1", unit: "" },
       { title: "salad", amount: "1", unit: "" },
-      { title: "", amount: "1", unit: "1" },
     ],
     preparation: {
       stepOne:

@@ -4,19 +4,19 @@
 .container {
   @include flex-vertical-center;
   width: 150px;
-  height: 100vh;
+  height: 100%;
   padding: 20px 0;
   position: fixed;
-  left: 0;
+  left: 0px;
   top: 0;
   z-index: 3;
-  background-color: #fff;
-  box-shadow: 5px 5px 10px $grey400;
+  background-color: transparent;
+  // box-shadow: 5px 5px 10px $grey400;
   justify-content: space-between;
 }
 
 .wrapper {
-  align-self: flex-end;
+  align-self: center;
 }
 
 .link {
