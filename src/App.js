@@ -9,6 +9,7 @@ import WelcomePage from "./views/WelcomePage/WelcomePage";
 import PlanPage from "./views/PlanPage/PlanPage";
 import RecepiesPage from "./views/RecepiesPage/RecepiesPage";
 import GroceryListPage from "./views/GroceryListPage/GroceryListPage";
+import DetailsPage from "./views/DetailsPage/DetailsPage";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
                 <Route path={routes.signup} component={SignUpPage} />
                 <Route path={routes.login} component={SignUpPage} />
                 <Route path={routes.plan} component={PlanPage} />
-                <Route path={routes.recepies} component={RecepiesPage} />
+                <Route exact path={routes.recepies} component={RecepiesPage} />
+                <Route path={routes.recepie} component={DetailsPage} />
                 <Route path={routes.list} component={GroceryListPage} />
               </Switch>
             </AnimatePresence>

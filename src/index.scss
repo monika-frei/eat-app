@@ -62,6 +62,9 @@ li {
 .bgWhite {
   background-color: #fff;
 }
+.bgGrey {
+  background-color: lighten($darkfont, 60%);
+}
 
 .borderPrimary {
   border-color: $primary-color;
@@ -92,6 +95,9 @@ li {
 }
 .buttonEdit {
   background-image: url("./assets/edit-button.png");
+}
+.buttonPrint {
+  background-image: url("./assets/printer.png");
 }
 
 .btn20 {

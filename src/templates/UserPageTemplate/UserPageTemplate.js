@@ -17,11 +17,6 @@ const UserPageTemplate = ({ children, bgColor, border, bgColorLight }) => {
           <div className={cardClass}>
             <Sidebar pageType={type} />
             <div className={wrapperClass}>
-              <Heading custom={styles.heading}>
-                {type === "plan" && "Plan"}
-                {type === "recepies" && "Recepies"}
-                {type === "grocerylist" && "Grocery list"}
-              </Heading>
               <div className={styles.page}>{children}</div>
             </div>
           </div>
