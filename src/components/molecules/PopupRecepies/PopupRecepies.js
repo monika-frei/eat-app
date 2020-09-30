@@ -30,6 +30,7 @@ const PopupRecepies = ({ recepies, meal, handleSaveRecepie, handleClose }) => {
               meal,
               id: item.id,
               title: item.title,
+              ingredients: item.ingredients,
               appUrl,
             };
             return (

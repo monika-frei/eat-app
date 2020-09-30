@@ -73,7 +73,13 @@ const RecepiesPage = () => {
               />
             </div>
           </div>
-          {isOpen && <QuickAdd item={activeRecepie} setOpen={setOpen} />}
+          {isOpen && (
+            <QuickAdd
+              item={activeRecepie}
+              setOpen={setOpen}
+              custom={styles.quickAdd}
+            />
+          )}
           {classOpen === "activeForm" && (
             <AddRecepieForm classOpen={classOpen} toggle={toggle} />
           )}

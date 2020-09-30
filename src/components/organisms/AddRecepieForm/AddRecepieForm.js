@@ -14,10 +14,22 @@ class AddRecepieForm extends Component {
       step: 1,
       editStep: null,
       editContent: "",
+      title: this.props.recepieToEdit ? this.props.recepieToEdit.title : "",
+      time: this.props.recepieToEdit ? this.props.recepieToEdit.extra.time : "",
+      servings: this.props.recepieToEdit
+        ? this.props.recepieToEdit.extra.servings
+        : "",
+      addInfo: this.props.recepieToEdit
+        ? this.props.recepieToEdit.extra.info
+        : "",
       unit: "-",
-      meals: [],
-      ingredients: [],
-      preparation: [],
+      meals: this.props.recepieToEdit ? this.props.recepieToEdit.category : [],
+      ingredients: this.props.recepieToEdit
+        ? this.props.recepieToEdit.ingredients
+        : [],
+      preparation: this.props.recepieToEdit
+        ? this.props.recepieToEdit.preparation
+        : [],
     };
     this.handleInputMeals = this.handleInputMeals.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -149,6 +161,7 @@ class AddRecepieForm extends Component {
             type="text"
             name="title"
             id="title"
+            value={this.state.title}
             className={styles.titleInput}
             onChange={this.handleInputChange}
           ></input>
@@ -178,7 +191,7 @@ class AddRecepieForm extends Component {
                   </label>
                 </div>
               );
-            })}{" "}
+            })}
           </div>
 
           <div className={styles.container}>
@@ -317,6 +330,7 @@ class AddRecepieForm extends Component {
                   type="text"
                   name="time"
                   id="time"
+                  value={this.state.time}
                   onChange={this.handleInputChange}
                 ></input>
               </div>
@@ -326,6 +340,7 @@ class AddRecepieForm extends Component {
                   type="text"
                   name="servings"
                   id="servings"
+                  value={this.state.servings}
                   onChange={this.handleInputChange}
                 ></input>
               </div>
@@ -334,12 +349,20 @@ class AddRecepieForm extends Component {
             <textarea
               id="addInfo"
               name="addInfo"
+              value={this.state.addInfo}
               onChange={this.handleInputChange}
             ></textarea>
           </div>
           <Button type="submit" bgColor="bgPrimary" onClick={this.handleSubmit}>
             Add
           </Button>
+          <ButtonIconSmall
+            bgImage="buttonDelete"
+            btnSize="btn30"
+            type="button"
+            custom={styles.buttonClose}
+            onClick={this.props.toggle}
+          ></ButtonIconSmall>
         </form>
       </FormAddTemplate>
     );

@@ -8,7 +8,7 @@ import AddPlanForm from "../../components/organisms/AddPlanForm/AddPlanForm";
 import ToggleOpen from "../../providers/ToggleOpen";
 import AddRecepies from "../../providers/AddRecepies";
 
-const PlanPage = (props) => {
+const PlanPage = () => {
   return (
     <ToggleOpen
       render={({ toggle, classOpen }) => (

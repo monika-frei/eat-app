@@ -18,8 +18,17 @@ export const quickAddRecepie = (day, meal, item) => {
         meal,
         id: item.id,
         title: item.title,
+        ingredients: item.ingredients,
         appUrl: `/recepies/:${item.id}`,
       },
+    },
+  };
+};
+export const deleteRecepie = (recepie) => {
+  return {
+    type: "DELETE_RECEPIE",
+    payload: {
+      recepie,
     },
   };
 };
@@ -27,6 +36,21 @@ export const quickAddRecepie = (day, meal, item) => {
 export const createRecepie = (recepie) => {
   return {
     type: "CREATE_RECEPIE",
+    payload: {
+      recepie,
+    },
+  };
+};
+
+export const displayRecepies = () => {
+  return {
+    type: "DISPLAY_RECEPIES",
+  };
+};
+
+export const displayRecepieDetails = (recepie) => {
+  return {
+    type: "DISPLAY_RECEPIE_DETAILS",
     payload: {
       recepie,
     },

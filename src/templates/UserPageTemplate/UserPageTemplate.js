@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./UserPageTemplate.module.scss";
 import Sidebar from "../../components/organisms/Sidebar/Sidebar";
-import Heading from "../../components/atoms/Heading/Heading";
 import PageType from "../../providers/PageType";
 
 import cx from "classnames";

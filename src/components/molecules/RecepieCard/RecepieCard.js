@@ -9,7 +9,7 @@ const RecepieCard = ({ item, handleQuickAdd }) => {
 
   return (
     <div className={styles.wrapper}>
-      <Link to="">
+      <Link to={`/recepies/${item.id}`}>
         <h2 className={styles.heading}>{item.title}</h2>
 
         <h3 className={styles.headingSmall}>Ingredients:</h3>

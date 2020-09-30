@@ -1,7 +1,7 @@
 const initialState = {
   recepies: [
     {
-      id: 1,
+      id: "1",
       category: ["breakfast"],
       title: "oat meal",
       url: "",
@@ -10,22 +10,31 @@ const initialState = {
         { title: "nuts", amount: "50", unit: "g" },
         { title: "milk", amount: "200", unit: "ml" },
       ],
-      preparation: {
-        stepOne:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie efficitur lacus, eu elementum magna fermentum ut. Fusce interdum nunc sed nisi sagittis, mattis vulputate sem porttitor. ",
-        stepTwo:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie efficitur lacus, eu elementum magna fermentum ut. Fusce interdum nunc sed nisi sagittis, mattis vulputate sem porttitor. ",
-        stepThree:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie efficitur lacus, eu elementum magna fermentum ut. Fusce interdum nunc sed nisi sagittis, mattis vulputate sem porttitor. ",
-      },
+      preparation: [
+        {
+          step: "1",
+          content:
+            "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, ",
+        },
+        {
+          step: "2",
+          content:
+            "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, ",
+        },
+        {
+          step: "3",
+          content:
+            "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, ",
+        },
+      ],
       extra: {
         time: "30min",
-        servings: 1,
+        servings: "1",
         info: "",
       },
     },
     {
-      id: 2,
+      id: "2",
       category: ["breakfast", "lunch"],
       title: "sandwich",
       url: "",
@@ -34,20 +43,31 @@ const initialState = {
         { title: "salad", amount: "1", unit: "" },
         { title: "bread", amount: "50", unit: "g" },
       ],
-      preparation: {
-        stepOne:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie efficitur lacus, eu elementum magna fermentum ut. Fusce interdum nunc sed nisi sagittis, mattis vulputate sem porttitor. ",
-        stepTwo:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie efficitur lacus, eu elementum magna fermentum ut. Fusce interdum nunc sed nisi sagittis, mattis vulputate sem porttitor. ",
-      },
+      preparation: [
+        {
+          step: "1",
+          content:
+            "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, ",
+        },
+        {
+          step: "2",
+          content:
+            "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, ",
+        },
+        {
+          step: "3",
+          content:
+            "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, ",
+        },
+      ],
       extra: {
         time: "15min",
-        servings: 1,
+        servings: "1",
         info: "",
       },
     },
     {
-      id: 3,
+      id: "3",
       category: ["breakfast"],
       title: "scrambled eggs",
       url: "",
@@ -56,22 +76,31 @@ const initialState = {
         { title: "onion", amount: "1", unit: "" },
         { title: "butter", amount: "200", unit: "ml" },
       ],
-      preparation: {
-        stepOne:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie efficitur lacus, eu elementum magna fermentum ut. Fusce interdum nunc sed nisi sagittis, mattis vulputate sem porttitor. ",
-        stepTwo:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie efficitur lacus, eu elementum magna fermentum ut. Fusce interdum nunc sed nisi sagittis, mattis vulputate sem porttitor. ",
-        stepThree:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie efficitur lacus, eu elementum magna fermentum ut. Fusce interdum nunc sed nisi sagittis, mattis vulputate sem porttitor. ",
-      },
+      preparation: [
+        {
+          step: "1",
+          content:
+            "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, ",
+        },
+        {
+          step: "2",
+          content:
+            "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, ",
+        },
+        {
+          step: "3",
+          content:
+            "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, ",
+        },
+      ],
       extra: {
         time: "30min",
-        servings: 1,
+        servings: "1",
         info: "",
       },
     },
     {
-      id: 4,
+      id: "4121323232123",
       category: ["lunch", "dinner"],
       title: "salad",
       url: "",
@@ -79,19 +108,27 @@ const initialState = {
         { title: "egg", amount: "1", unit: "" },
         { title: "onion", amount: "1", unit: "" },
         { title: "salad", amount: "1", unit: "" },
-        { title: "", amount: "1", unit: "1" },
       ],
-      preparation: {
-        stepOne:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie efficitur lacus, eu elementum magna fermentum ut. Fusce interdum nunc sed nisi sagittis, mattis vulputate sem porttitor. ",
-        stepTwo:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie efficitur lacus, eu elementum magna fermentum ut. Fusce interdum nunc sed nisi sagittis, mattis vulputate sem porttitor. ",
-        stepThree:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse molestie efficitur lacus, eu elementum magna fermentum ut. Fusce interdum nunc sed nisi sagittis, mattis vulputate sem porttitor. ",
-      },
+      preparation: [
+        {
+          step: "1",
+          content:
+            "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, ",
+        },
+        {
+          step: "2",
+          content:
+            "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, ",
+        },
+        {
+          step: "3",
+          content:
+            "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, ",
+        },
+      ],
       extra: {
-        time: "30min",
-        servings: 1,
+        time: "",
+        servings: "",
         info: "",
       },
     },
@@ -144,6 +181,15 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "DISPLAY_RECEPIES":
+      return {
+        recepies: state.recepies,
+      };
+    case "DISPLAY_RECEPIE_DETAILS":
+      return {
+        ...state,
+        recepie: action.payload.recepie,
+      };
     case "ADD_RECEPIES_TO_PLAN":
       return {
         ...state,
@@ -154,6 +200,14 @@ const rootReducer = (state = initialState, action) => {
             ...action.payload.savedRecepies,
           },
         },
+      };
+    case "DELETE_RECEPIE":
+      const filteredRecepies = state.recepies.filter(
+        (item) => item.id !== action.payload.recepie.id
+      );
+      return {
+        ...state,
+        recepies: filteredRecepies,
       };
     case "QUICK_ADD":
       return {
