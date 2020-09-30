@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./RecepiesGrid.module.scss";
 import RecepieCard from "../../molecules/RecepieCard/RecepieCard";
-import { recepies } from "../../../dummyData/index";
+import { connect } from "react-redux";
 
-const RecepiesGrid = ({ meal, inputContent, handleQuickAdd }) => {
+const RecepiesGrid = ({ recepies, meal, inputContent, handleQuickAdd }) => {
   const recepiesArray =
     meal === "all"
       ? recepies
@@ -28,11 +28,18 @@ const RecepiesGrid = ({ meal, inputContent, handleQuickAdd }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    recepies: state.recepies,
+  };
+};
+
 RecepiesGrid.propTypes = {
+  recepies: PropTypes.object.isRequired,
   meal: PropTypes.oneOf(["all", "breakfast", "lunch", "dinner", "snacks"])
     .isRequired,
   inputContent: PropTypes.string,
   handleQuickAdd: PropTypes.func,
 };
 
-export default RecepiesGrid;
+export default connect(mapStateToProps)(RecepiesGrid);

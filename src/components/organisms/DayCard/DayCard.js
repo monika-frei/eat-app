@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Card from "../../molecules/Card/Card";
 import ButtonIconSmall from "../../atoms/ButtonIconSmall/ButtonIconSmall";
-import AddRecepies from "../../../providers/AddRecepies";
 import styles from "./DayCard.module.scss";
 import { connect } from "react-redux";
 

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./RecepiesPage.module.scss";
 import cx from "classnames";
 import UserPageTemplate from "../../templates/UserPageTemplate/UserPageTemplate";
+import Heading from "../../components/atoms/Heading/Heading";
 import Button from "../../components/atoms/Button/Button";
 import RecepiesGrid from "../../components/organisms/RecepiesGrid/RecepiesGrid";
 import ButtonIcon from "../../components/atoms/ButtonIcon/ButtonIcon";
@@ -39,6 +40,7 @@ const RecepiesPage = () => {
     <ToggleOpen
       render={({ toggle, classOpen }) => (
         <UserPageTemplate bgColorLight="bgPrimaryLight" border="borderPrimary">
+          <Heading custom={styles.heading}>Recepies</Heading>
           <div className={styles.wrapper}>
             <div className={styles.buttons}>
               {meals.map((meal) => {
@@ -71,7 +73,13 @@ const RecepiesPage = () => {
               />
             </div>
           </div>
-          {isOpen && <QuickAdd item={activeRecepie} setOpen={setOpen} />}
+          {isOpen && (
+            <QuickAdd
+              item={activeRecepie}
+              setOpen={setOpen}
+              custom={styles.quickAdd}
+            />
+          )}
           {classOpen === "activeForm" && (
             <AddRecepieForm classOpen={classOpen} toggle={toggle} />
           )}

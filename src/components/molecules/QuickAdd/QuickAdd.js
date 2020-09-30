@@ -3,19 +3,21 @@ import PropTypes from "prop-types";
 import styles from "./QuickAdd.module.scss";
 import ButtonIconSmall from "../../atoms/ButtonIconSmall/ButtonIconSmall";
 import AddRecepies from "../../../providers/AddRecepies";
+import cx from "classnames";
 import { connect } from "react-redux";
 import { quickAddRecepie as quickAddAction } from "../../../redux/actions/index";
 
-const QuickAdd = ({ item, setOpen, quickAdd }) => {
+const QuickAdd = ({ item, setOpen, quickAdd, custom }) => {
   const [day, setDay] = useState("");
   const [meal, setMeal] = useState("");
+  const wrapperClass = cx(styles.wrapper, custom);
   const handleAddRecepie = (day, meal, item) => {
     quickAdd(day, meal, item);
   };
   return (
     <AddRecepies
       render={() => (
-        <div className={styles.wrapper}>
+        <div className={wrapperClass}>
           <h2 className={styles.heading}>Add recepie to your plan</h2>
           <div>
             <p className={styles.paragraph}>

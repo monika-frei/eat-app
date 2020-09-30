@@ -102,8 +102,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addRecepiesToPlan: (day, meal, id) =>
-      dispatch(addRecepiesToPlanAction(day, meal, id)),
+    addRecepiesToPlan: (day, savedRecepies) =>
+      dispatch(addRecepiesToPlanAction(day, savedRecepies)),
   };
 };
 
