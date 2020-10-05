@@ -5,22 +5,60 @@
   @include flex-vertical-center;
   min-height: 80vh;
 }
+h2 {
+  color: $darkfont;
+  font-weight: $semi-bold;
+}
 
 .buttons {
-  position: fixed;
-  bottom: 50px;
-  right: 50px;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 20px;
 }
 
 .button {
-  margin-left: 10px;
+  width: 150px;
+  margin-left: 20px;
   position: relative;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 6px darken($tertiary-color, 10%);
 
   &:hover {
-    background-color: darken($tertiary-color, 5%);
+    box-shadow: 0 4px darken($tertiary-color, 10%);
     top: 3px;
   }
   &:active {
+    box-shadow: 0 0 darken($tertiary-color, 10%);
     top: 6px;
+  }
+}
+.classActiveBtn {
+  box-shadow: none;
+  background-color: darken($tertiary-color, 10%);
+
+  &:hover {
+    box-shadow: none;
+    top: 0;
+  }
+  &:active {
+    box-shadow: none;
+    top: 0;
+  }
+}
+
+.buttonGenerate {
+  margin-top: 50px;
+  border-radius: 5px;
+  position: relative;
+  color: darken($tertiary-color, 30%);
+  border: 2px solid darken($tertiary-color, 10%);
+  &:hover {
+    background-color: darken($tertiary-color, 10%);
+    color: #fff;
+  }
+  &:active {
+    transform: scale(0.98);
   }
 }
