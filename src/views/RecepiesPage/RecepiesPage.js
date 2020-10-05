@@ -27,7 +27,7 @@ const RecepiesPage = () => {
   const buttonClass = cx(styles.button, {
     [`${styles.classActiveBtn}`]: classActiveBtn,
   });
-  const handleSelectMeal = (meal) => {
+  const handleSelectOption = (meal) => {
     setSelectedMeal(meal);
     setClassActiveBtn(true);
   };
@@ -48,7 +48,7 @@ const RecepiesPage = () => {
                   <Button
                     bgColor="bgPrimary"
                     custom={selectedMeal === meal ? buttonClass : styles.button}
-                    onClick={() => handleSelectMeal(meal)}
+                    onClick={() => handleSelectOption(meal)}
                   >
                     {meal}
                   </Button>

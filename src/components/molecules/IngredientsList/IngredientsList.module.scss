@@ -1,0 +1,58 @@
+@import "../../../scss//variables";
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.buttons > button {
+  margin: 0 5px;
+}
+
+.circle {
+  width: 25px;
+  height: 25px;
+  border: 1px solid $darkfont;
+  border-radius: 50%;
+}
+
+.item {
+  padding: 5px 0;
+  border-bottom: 1px solid $darkfont;
+  display: grid;
+  grid-template-columns: 50px auto 150px;
+  grid-template-rows: auto;
+  align-items: center;
+}
+
+.wrapperInput {
+  display: flex;
+  .input {
+    border: none;
+    background-color: lighten($tertiary-color, 10%);
+    border-radius: 5px;
+    margin-left: 5px;
+    padding: 5px;
+    width: 50px;
+  }
+}
+
+.title {
+  list-style-type: none;
+  color: $darkfont;
+}
+
+.amount {
+  justify-self: end;
+}
+
+.delete {
+  width: 20px;
+}
+
+.input {
+  width: 50px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  background-color: lighten($tertiary-color, 10%);
+}
