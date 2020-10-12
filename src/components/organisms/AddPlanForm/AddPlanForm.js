@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./AddPlanForm.module.scss";
 import FormAddTemplate from "../../../templates/FormAddTemplate/FormAddTemplate";
 import Card from "../../molecules/Card/Card";
@@ -10,7 +10,9 @@ import { addRecepiesToPlan as addRecepiesToPlanAction } from "../../../redux/act
 const AddPlanForm = ({
   classOpen,
   day,
+  date,
   setDay,
+  setDate,
   meals,
   meal,
   savedRecepies,
@@ -25,8 +27,9 @@ const AddPlanForm = ({
 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    addRecepiesToPlan(day, savedRecepies);
+    addRecepiesToPlan(day, date, savedRecepies);
     setDay("");
+    setDate("");
     setSavedRecepies({
       breakfast: [],
       lunch: [],
@@ -65,7 +68,7 @@ const AddPlanForm = ({
                   <Card
                     meal={meal}
                     handleAddRecepie={handleAddRecepie}
-                    handleDeleteRecepie={handleDeleteRecepie}
+                    handleDelete={handleDeleteRecepie}
                     savedRecepies={savedRecepies[meal]}
                   />
                 ))}
@@ -102,8 +105,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addRecepiesToPlan: (day, savedRecepies) =>
-      dispatch(addRecepiesToPlanAction(day, savedRecepies)),
+    addRecepiesToPlan: (day, date, savedRecepies) =>
+      dispatch(addRecepiesToPlanAction(day, date, savedRecepies)),
   };
 };
 

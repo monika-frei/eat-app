@@ -5,9 +5,10 @@
   @include flex-vertical-center;
   min-height: 80vh;
 }
-h2 {
+h3 {
   color: $darkfont;
   font-weight: $semi-bold;
+  background-color: #fff;
 }
 
 .buttons {

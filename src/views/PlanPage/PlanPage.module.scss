@@ -11,8 +11,8 @@
 
 .buttonWrapper {
   position: fixed;
-  right: 50px;
-  top: 30px;
+  right: 4rem;
+  top: 10rem;
   z-index: 100;
 }
 
@@ -25,5 +25,12 @@
   }
   &:active {
     top: 6px;
+  }
+}
+
+@media (min-width: $breakpoint-desktop) {
+  .buttonWrapper {
+    right: 5rem;
+    top: 5rem;
   }
 }

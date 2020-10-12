@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./WelcomeTemplate.module.scss";
-import WelcomeNavigation from "../../components/organisms/WelcomeNavigation/WelcomeNavigation";
+import Header from "../../components/organisms/Header/Header";
 
 const WelcomeTemplate = ({ children }) => {
   return (
     <div className={styles.container}>
-      <WelcomeNavigation />
+      <Header />
       {children}
     </div>
   );

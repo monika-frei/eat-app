@@ -9,7 +9,6 @@ import { createRecepie as createRecepieAction } from "../../../redux/actions/ind
 
 class AddRecepieForm extends Component {
   constructor(props) {
-    super(props);
     this.state = {
       step: 1,
       editStep: null,

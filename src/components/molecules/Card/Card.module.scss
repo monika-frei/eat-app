@@ -12,9 +12,12 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 1rem;
   background-color: lighten($secondary-color, 45%);
-  border-radius: 10px;
+  border-radius: 1rem;
+  h3 {
+    font-size: $fontSize-s;
+  }
 }
 
 .list {
@@ -26,8 +29,24 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  & > * {
+    font-size: $fontSize-xs;
+  }
 }
 
 .buttonDelete {
   margin-right: 10px;
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .heading {
+    h3 {
+      font-size: $fontSize-m;
+    }
+  }
+  .listItem {
+    & > * {
+      font-size: $fontSize-s;
+    }
+  }
 }

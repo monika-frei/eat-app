@@ -13,7 +13,7 @@ const WelcomeNavigation = () => {
       transition={transition}
       className={styles.container}
     >
-      <Logo />
+      <Logo custom={styles.logo} />
       <nav>
         <ul className={styles.nav}>
           <li className={styles.link}>

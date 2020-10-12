@@ -2,12 +2,7 @@ import React from "react";
 import styles from "./Card.module.scss";
 import ButtonIconSmall from "../../atoms/ButtonIconSmall/ButtonIconSmall";
 
-const Card = ({
-  meal,
-  savedRecepies = [],
-  handleAddRecepie,
-  handleDeleteRecepie,
-}) => {
+const Card = ({ meal, savedRecepies = [], handleAddRecepie, handleDelete }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.heading}>
@@ -25,12 +20,12 @@ const Card = ({
         <ul className={styles.list}>
           {savedRecepies.map((recepie) => (
             <li key={recepie.id} className={styles.listItem}>
-              {handleDeleteRecepie && (
+              {handleDelete && (
                 <ButtonIconSmall
                   bgImage="buttonDelete"
                   btnSize="btn20"
                   custom={styles.buttonDelete}
-                  onClick={() => handleDeleteRecepie(meal, recepie)}
+                  onClick={() => handleDelete(meal, recepie)}
                 ></ButtonIconSmall>
               )}
               <div>{recepie.title}</div>
