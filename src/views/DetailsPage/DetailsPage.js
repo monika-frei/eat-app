@@ -73,7 +73,6 @@ const DetailsPage = ({ history, recepies, location, deleteRecepie }) => {
             </Paragraph>
             <ButtonIconSmall
               bgImage="buttonPrint"
-              btnSize="btn30"
               custom={styles.btnPrint}
               onClick={() => generatePdf()}
             ></ButtonIconSmall>
@@ -83,7 +82,7 @@ const DetailsPage = ({ history, recepies, location, deleteRecepie }) => {
               <ul>
                 {ingredients.map((item) => (
                   <li>
-                    {item.title}{" "}
+                    {item.title}
                     <span>
                       {item.amount}
                       {item.unit}

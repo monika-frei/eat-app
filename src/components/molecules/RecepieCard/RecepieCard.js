@@ -8,25 +8,26 @@ const RecepieCard = ({ item, handleQuickAdd }) => {
   const ingredients = item.ingredients;
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.container}>
       <Link to={`/recepies/${item.id}`}>
-        <h2 className={styles.heading}>{item.title}</h2>
-
-        <h3 className={styles.headingSmall}>Ingredients:</h3>
-        <div>
-          <ul className={styles.info}>
-            {ingredients.map((ingredient) => {
-              return (
-                <li key={ingredient.title} className={styles.ingredient}>
-                  <span>{ingredient.title}</span>
-                  <div className={styles.amount}>
-                    <span>{ingredient.amount}</span>
-                    <span>{ingredient.unit}</span>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+        <div className={styles.wrapper}>
+          <h2 className={styles.heading}>{item.title}</h2>
+          <h3 className={styles.headingSmall}>Ingredients:</h3>
+          <div>
+            <ul className={styles.info}>
+              {ingredients.map((ingredient) => {
+                return (
+                  <li key={ingredient.title} className={styles.ingredient}>
+                    <span>{ingredient.title}</span>
+                    <div className={styles.amount}>
+                      <span>{ingredient.amount}</span>
+                      <span>{ingredient.unit}</span>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </Link>
       <ButtonIcon

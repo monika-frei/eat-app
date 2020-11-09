@@ -40,9 +40,11 @@ const AddPlanForm = ({
   };
 
   return (
-    <FormAddTemplate classOpen={classOpen}>
-      <form>
-        <label htmlFor="day">Which day do you want to plan?</label>
+    <FormAddTemplate classOpen={classOpen} toggle={toggle}>
+      <form className={styles.form}>
+        <label className={styles.label} htmlFor="day">
+          Which day do you want to plan?
+        </label>
         <select
           name="day"
           value={day}

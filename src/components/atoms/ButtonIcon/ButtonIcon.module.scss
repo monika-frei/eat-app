@@ -33,25 +33,26 @@ div.line:last-of-type {
 
 @media (min-width: $breakpoint-tablet) {
   .button {
+    width: 6rem;
+    height: 6rem;
+  }
+  div.line:first-of-type {
+    width: 4rem;
+  }
+  div.line:last-of-type {
+    height: 4rem;
+  }
+}
+
+@media (min-width: $breakpoint-desktop) {
+  .button {
     width: 8rem;
     height: 8rem;
   }
   div.line:first-of-type {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 5rem;
-    border-bottom-width: 3px;
-    border-bottom-style: solid;
   }
   div.line:last-of-type {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     height: 5rem;
-    border-left-width: 3px;
-    border-left-style: solid;
   }
 }

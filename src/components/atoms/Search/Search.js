@@ -10,7 +10,7 @@ const Search = ({ custom, onChange }) => {
       className={inputClass}
       type="text"
       onChange={onChange}
-      placeholder="what do you wan to eat?"
+      placeholder="what do you want to eat?"
     ></input>
   );
 };

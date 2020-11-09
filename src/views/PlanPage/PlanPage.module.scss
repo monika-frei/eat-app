@@ -10,10 +10,9 @@
 }
 
 .buttonWrapper {
-  position: fixed;
+  position: absolute;
   right: 4rem;
   top: 10rem;
-  z-index: 100;
 }
 
 .button {
@@ -25,6 +24,13 @@
   }
   &:active {
     top: 6px;
+  }
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .buttonWrapper {
+    right: 5rem;
+    top: 12rem;
   }
 }
 

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styles from "./Header.module.scss";
 import { useViewport } from "../../../hooks/index";
 import { motion } from "framer-motion";
 import HamburgerMenu from "../../organisms/HamburgerMenu/HamburgerMenu";
@@ -15,11 +14,7 @@ const Header = ({ pageType }) => {
   const menuItemsLogged = ["Plan", "Recepies", "Grocery List", "Log Out"];
   const menuItems = ["Log in", "Sign up"];
   return (
-    <motion.div
-      exit={{ opacity: 1 }}
-      transition={transition}
-      className={styles.container}
-    >
+    <motion.div exit={{ opacity: 1 }} transition={transition}>
       {width < breakpoint && logged && (
         <HamburgerMenu menuItems={menuItemsLogged} />
       )}

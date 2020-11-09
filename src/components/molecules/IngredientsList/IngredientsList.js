@@ -32,12 +32,14 @@ const IngredientsList = () => {
                             onChange={(e) => handleChange(e, ingredient)}
                             className={styles.input}
                           ></input>
-                          <span>{ingredient.unit}</span>
+                          <span className={styles.unit}>{ingredient.unit}</span>
                         </>
                       ) : (
                         <>
-                          <span>{ingredient.amount}</span>
-                          <span>{ingredient.unit}</span>
+                          <span className={styles.amount}>
+                            {ingredient.amount}
+                          </span>
+                          <span className={styles.unit}>{ingredient.unit}</span>
                         </>
                       )}
                     </div>
@@ -45,20 +47,17 @@ const IngredientsList = () => {
                       {activeInput && activeIngredient === ingredient ? (
                         <ButtonIconSmall
                           bgImage="buttonChecked"
-                          btnSize="btn20"
                           onClick={() => handleSave(ingredient)}
                         ></ButtonIconSmall>
                       ) : (
                         <ButtonIconSmall
                           bgImage="buttonEdit"
-                          btnSize="btn20"
                           onClick={() => handleEdit(ingredient)}
                         ></ButtonIconSmall>
                       )}
 
                       <ButtonIconSmall
                         bgImage="buttonDelete"
-                        btnSize="btn20"
                         onClick={() => handleDelete(ingredient)}
                       ></ButtonIconSmall>
                     </div>

@@ -1,55 +1,57 @@
 @import "../../../scss/variables";
 
-label,
+.form {
+  padding-bottom: 1rem;
+  & > select {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    font-size: $fontSize-m;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: lighten($secondary-color, 30%);
+    appearance: none;
+    cursor: pointer;
+    margin-bottom: 2rem;
+  }
+
+  & > option {
+    background-color: white;
+  }
+  & > select[name="recepie"] {
+    margin-top: 2rem;
+  }
+}
+.label,
 .heading {
   display: block;
-  font-size: $fontSize-m;
-  font-weight: $semi-bold;
-  margin: 20px 0 10px 0;
-}
-select {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  font-size: $fontSize-m;
-  border: none;
-  border-radius: 5px;
-  background-color: lighten($secondary-color, 30%);
-  appearance: none;
-  cursor: pointer;
-  margin-bottom: 20px;
-}
-
-option {
-  background-color: white;
+  font-size: $fontSize-s;
+  font-weight: $light;
+  margin: 5rem 0 2rem 0;
 }
 
 .meals {
-  margin-top: 10px;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border-radius: 10px;
-}
-
-select[name="recepie"] {
-  margin-top: 20px;
+  border-radius: 1rem;
 }
 
 .button {
-  margin: 15px auto;
+  margin: 1.5rem auto;
   position: relative;
 }
 .button:hover {
-  top: 3px;
+  top: 0.3rem;
 }
 
 .button:active {
-  top: 6px;
+  top: 0.6rem;
 }
 
 .recepies {
-  padding: 30px;
+  padding: 3rem;
   width: 60%;
   height: 50%;
   position: absolute;
@@ -58,18 +60,18 @@ select[name="recepie"] {
   transform: translate(-50%, -50%);
   background-color: white;
   border: 1px solid $secondary-color;
-  border-radius: 10px;
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 5px 5px 10px $grey300;
+  box-shadow: 0.5rem 0.5rem 1rem $grey300;
 }
 
 .search {
   background-color: $grey100;
   width: 100%;
   border: none;
-  width: 300px;
+  width: 30rem;
   font-size: $fontSize-s;
 }
 
@@ -81,7 +83,14 @@ select[name="recepie"] {
 .listItem {
   list-style-type: none;
   width: 100%;
-  padding: 5px;
+  padding: 0.5rem;
   border-top: 1px solid $grey100;
-  border-top: 1px solid $grey100;
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .label,
+  .heading {
+    font-size: $fontSize-m;
+    margin: 2rem 0 1rem 0;
+  }
 }
