@@ -3,25 +3,35 @@
 
 .container {
   @include flex-vertical-center;
-  width: 150px;
+  width: 200px;
   height: 100%;
   padding: 20px 0;
   position: fixed;
-  left: 0px;
+  left: 0;
   top: 0;
-  z-index: 3;
-  background-color: transparent;
-  // box-shadow: 5px 5px 10px $grey400;
+  z-index: 5;
   justify-content: space-between;
+  background-color: transparent;
 }
 
 .wrapper {
-  align-self: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 10px;
 
-.link {
-  display: block;
-  padding: 10px 0;
+  .link {
+    display: block;
+    padding: 10px 0;
+    margin-right: 10px;
+  }
 }
 
 .logout {

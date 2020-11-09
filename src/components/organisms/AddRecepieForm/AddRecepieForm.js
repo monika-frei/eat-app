@@ -6,6 +6,7 @@ import ButtonIconSmall from "../../atoms/ButtonIconSmall/ButtonIconSmall";
 import Button from "../../atoms/Button/Button";
 import { connect } from "react-redux";
 import { createRecepie as createRecepieAction } from "../../../redux/actions/index";
+import ListItem from "../../atoms/ListItem/ListItem";
 
 class AddRecepieForm extends Component {
   constructor(props) {
@@ -154,8 +155,8 @@ class AddRecepieForm extends Component {
     const { classOpen } = this.props;
 
     return (
-      <FormAddTemplate classOpen={classOpen}>
-        <form>
+      <FormAddTemplate classOpen={classOpen} toggle={this.props.toggle}>
+        <form className={styles.form}>
           <label htmlFor="title">Write a title:</label>
           <input
             type="text"
@@ -242,19 +243,10 @@ class AddRecepieForm extends Component {
               <ul className={styles.ingredientsList}>
                 {this.state.ingredients.map((item) => {
                   return (
-                    <li className={styles.listItem}>
-                      <span>{item.title}</span>
-                      <span>
-                        {item.amount} {item.unit}
-                      </span>
-                      <ButtonIconSmall
-                        bgImage="buttonDelete"
-                        btnSize="btn20"
-                        type="button"
-                        custom={styles.button}
-                        onClick={() => this.handleDeleteIngredient(item)}
-                      ></ButtonIconSmall>
-                    </li>
+                    <ListItem
+                      item={item}
+                      handleDeleteIngredient={this.handleDeleteIngredient}
+                    />
                   );
                 })}
               </ul>
@@ -356,13 +348,6 @@ class AddRecepieForm extends Component {
           <Button type="submit" bgColor="bgPrimary" onClick={this.handleSubmit}>
             Add
           </Button>
-          <ButtonIconSmall
-            bgImage="buttonDelete"
-            btnSize="btn30"
-            type="button"
-            custom={styles.buttonClose}
-            onClick={this.props.toggle}
-          ></ButtonIconSmall>
         </form>
       </FormAddTemplate>
     );

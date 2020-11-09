@@ -1,79 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import styles from "./GroceryList.module.scss";
 import IngredientsList from "../../molecules/IngredientsList/IngredientsList";
 import Button from "../../atoms/Button/Button";
 import ButtonIconSmall from "../../atoms/ButtonIconSmall/ButtonIconSmall";
-import { connect } from "react-redux";
 
-const GroceryList = ({
-  days,
-  plan,
-  setGroceryList,
-  setActivePopUp,
-  ingredients,
-  setIngredients,
-}) => {
-  useEffect(() => {
-    let daysArray;
-    if (days.includes("all")) {
-      daysArray = [
-        "monday",
-        "tuesday",
-        "wednesday",
-        "thursday",
-        "friday",
-        "saturday",
-        "sunday",
-      ];
-    } else {
-      daysArray = days;
-    }
-    let allRecepies = [];
-    daysArray.map((day) => {
-      allRecepies = [
-        ...allRecepies,
-        ...plan[day].breakfast,
-        ...plan[day].lunch,
-        ...plan[day].dinner,
-        ...plan[day].snacks,
-      ];
-    });
-    let ingredientsArray = [];
-    allRecepies.map((item) => {
-      return (ingredientsArray = [...ingredientsArray, ...item.ingredients]);
-    });
-    let filteredIngredients = [];
-    ingredientsArray.forEach((item) => {
-      if (
-        filteredIngredients.filter(
-          (ingredient) =>
-            ingredient.title === item.title && ingredient.unit === item.unit
-        ).length > 0
-      ) {
-        let indexToDelete = filteredIngredients.findIndex(
-          (ingredient) =>
-            ingredient.title === item.title && ingredient.unit === item.unit
-        );
-        const summedItem = {
-          title: filteredIngredients[indexToDelete].title,
-          amount: (
-            parseInt(filteredIngredients[indexToDelete].amount, 10) +
-            parseInt(item.amount, 10)
-          ).toString(),
-          unit: filteredIngredients[indexToDelete].unit,
-        };
-        filteredIngredients = filteredIngredients.filter(
-          (ingredient, index) => index !== indexToDelete
-        );
-        filteredIngredients = [...filteredIngredients, summedItem];
-      } else {
-        filteredIngredients = [...filteredIngredients, item];
-      }
-    });
-    setIngredients(filteredIngredients);
-    setGroceryList(filteredIngredients);
-  }, [days, plan]);
-
+const GroceryList = ({ setActivePopUp }) => {
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.heading}>Grocery List</h2>
@@ -89,7 +21,7 @@ const GroceryList = ({
           custom={styles.btnPrint}
         ></ButtonIconSmall>
       </div>
-      <IngredientsList ingredients={ingredients} />
+      <IngredientsList />
       <Button
         bgColor="bgTertiary"
         custom={styles.button}
@@ -101,10 +33,8 @@ const GroceryList = ({
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    plan: state.plan,
-  };
+GroceryList.propTypes = {
+  setActivePopUp: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(GroceryList);
+export default GroceryList;

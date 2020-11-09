@@ -177,6 +177,7 @@ const initialState = {
       snacks: [],
     },
   },
+  groceryList: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -198,6 +199,7 @@ const rootReducer = (state = initialState, action) => {
           [action.payload.day]: {
             ...state.plan[action.payload.day],
             ...action.payload.savedRecepies,
+            date: action.payload.date,
           },
         },
       };
@@ -227,6 +229,30 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         recepies: [...state.recepies, action.payload.recepie],
+      };
+    case "GENERATE_NEW_GROCERY_LIST":
+      return {
+        ...state,
+        groceryList: action.payload.list,
+        additionalItems: [],
+      };
+    case "ADD_GROCERY_LIST":
+      return {
+        ...state,
+        groceryList: [...state.groceryList, ...action.payload.list],
+      };
+    case "ADD_ITEM_TO_GROCERY_LIST":
+      return {
+        ...state,
+        groceryList: [...state.groceryList, action.payload.item],
+      };
+    case "DELETE_ITEM_FROM_GROCERY_LIST":
+      const filteredList = state.groceryList.filter((ingredient) => {
+        return ingredient !== action.payload.item;
+      });
+      return {
+        ...state,
+        groceryList: filteredList,
       };
     default:
       return state;

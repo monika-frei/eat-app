@@ -35,7 +35,7 @@ const WelcomePage = () => {
           </Paragraph>
           <Link to={routes.signup}>
             <Button
-              bgColor="bgPrimary"
+              bgColor="bgPrimaryDark"
               custom={styles.button}
               onClick={() => setOpenPage(!isOpenPage)}
             >

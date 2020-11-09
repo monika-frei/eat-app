@@ -1,8 +1,7 @@
 import React from "react";
 import styles from "./UserPageTemplate.module.scss";
-import Sidebar from "../../components/organisms/Sidebar/Sidebar";
+import Header from "../../components/organisms/Header/Header";
 import PageType from "../../providers/PageType";
-
 import cx from "classnames";
 
 const UserPageTemplate = ({ children, bgColor, border, bgColorLight }) => {
@@ -14,7 +13,7 @@ const UserPageTemplate = ({ children, bgColor, border, bgColorLight }) => {
       render={(type) => (
         <div className={containerClass}>
           <div className={cardClass}>
-            <Sidebar pageType={type} />
+            <Header pageType={type} />
             <div className={wrapperClass}>
               <div className={styles.page}>{children}</div>
             </div>

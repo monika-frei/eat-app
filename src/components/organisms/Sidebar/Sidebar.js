@@ -15,8 +15,8 @@ const Sidebar = ({ pageType }) => {
       transition={transition}
       className={styles.container}
     >
-      <Logo />
       <nav className={styles.wrapper}>
+        <Logo />
         <ul className={styles.nav}>
           <li className={styles.link}>
             <NavLink to="/plan">

@@ -4,19 +4,29 @@ import ButtonIconSmall from "../../atoms/ButtonIconSmall/ButtonIconSmall";
 import styles from "./DayCard.module.scss";
 import { connect } from "react-redux";
 
-const DayCard = ({ day, toggle, handleEdit, plan = [] }) => {
+const DayCard = ({
+  day,
+  toggle,
+  handleEdit,
+  plan = [],
+  date,
+  handleDelete,
+}) => {
   const meals = ["breakfast", "lunch", "dinner", "snacks"];
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2 className={styles.heading}>{day}</h2>
+        <div>
+          <h2 className={styles.heading}>{day}</h2>
+          <p className={styles.date}>{date}</p>
+        </div>
         {handleEdit && (
           <ButtonIconSmall
             bgImage="buttonAdd"
             btnSize="btn30"
             onClick={() => {
               toggle();
-              handleEdit(day, plan);
+              handleEdit(day, date, plan);
             }}
             type="button"
             custom={styles.button}

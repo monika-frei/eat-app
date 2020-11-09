@@ -1,11 +1,11 @@
 @import "../../../scss/mixins";
 @import "../../../scss/variables";
 
-.wrapper {
+.container {
   @include flex-vertical-center;
   align-items: flex-start;
-  width: 250px;
-  padding: 20px 10px;
+  min-width: 25rem;
+  padding: 2rem 1rem;
   position: relative;
   z-index: 2;
 
@@ -31,35 +31,41 @@
     border: 1px solid $primary-color;
     border-radius: 10px;
     z-index: -1;
-    border-radius: 10px;
   }
 }
 
+.wrapper {
+  @include flex-vertical-center;
+}
+
 .heading {
-  font-size: $fontSize-l;
+  font-size: $fontSize-m;
+  font-weight: $bold;
   color: $darkfont;
   text-transform: capitalize;
-  margin-bottom: 10px;
-  align-self: center;
+  margin-bottom: 1rem;
+  margin: 0 auto;
 }
 
 .headingSmall {
-  font-size: $fontSize-m;
+  font-size: $fontSize-s;
   font-weight: $semi-bold;
   color: $darkfont;
-  margin-bottom: 10px;
+  margin: 0.8rem 0;
+  align-self: flex-start;
 }
 .info {
   width: 100%;
-  padding: 10px 0;
+  padding: 1rem 0;
 }
 
 .ingredient {
-  width: 230px;
+  width: 23rem;
   display: grid;
   grid-template-columns: 6fr 1fr;
   grid-template-rows: auto;
   justify-content: space-between;
+  font-size: $fontSize-xs;
 
   span {
     display: block;
@@ -76,4 +82,16 @@
   align-self: center;
   border: 1px solid $primary-color;
   border-radius: 50%;
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .heading {
+    font-size: $fontSize-l;
+  }
+  .headingSmall {
+    font-size: $fontSize-m;
+  }
+  .ingredient {
+    font-size: $fontSize-s;
+  }
 }

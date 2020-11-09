@@ -3,10 +3,10 @@
 
 .container {
   @include flex-vertical-center;
-  padding-bottom: 10px;
-  border-radius: 10px;
+  padding-bottom: 1rem;
+  border-radius: 1rem;
   position: relative;
-  z-index: 2;
+  z-index: 1;
 
   &::before {
     content: "";
@@ -14,9 +14,9 @@
     height: 100%;
     display: block;
     position: absolute;
-    background-color: #fff;
+    background-color: lighten($secondary-color, 25%);
     z-index: -2;
-    border-radius: 10px;
+    border-radius: 1rem;
     transform: skew(1deg, -1deg) translateX(-2%);
   }
   &::after {
@@ -28,30 +28,44 @@
     top: 0;
     left: 0;
     border: 1px solid $secondary-color;
-    border-radius: 10px;
+    border-radius: 1rem;
     z-index: -1;
-    border-radius: 10px;
   }
 }
 
 .header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 15px 20px;
+  padding: 1.5rem 2.5rem;
 }
 
 .heading {
   width: 100%;
-  font-size: $fontSize-l;
+  font-size: $fontSize-m;
   color: $darkfont;
   font-weight: $semi-bold;
   text-transform: uppercase;
   align-self: center;
 }
 
+.date {
+  color: $darkfont;
+  font-weight: $light;
+  font-size: $fontSize-xs;
+}
+
 .button {
   align-self: flex-end;
   background-repeat: no-repeat;
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .heading {
+    font-size: $fontSize-l;
+  }
+  .date {
+    font-size: $fontSize-s;
+  }
 }

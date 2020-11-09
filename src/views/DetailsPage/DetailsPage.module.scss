@@ -1,54 +1,36 @@
 @import "../../scss/variables";
 
 .container {
-  margin: 10px 100px;
-  padding: 20px 50px;
   display: flex;
   flex-direction: column;
-  color: $darkfont;
   position: relative;
-  z-index: 2;
-
-  &::before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    background-color: #fff;
-    z-index: -2;
-    border-radius: 10px;
-    transform: skew(1deg, -1deg) translate(-6%, -2%);
-  }
-  &::after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: 1px solid $primary-color;
-    border-radius: 10px;
-    z-index: -1;
-    border-radius: 10px;
-  }
+  z-index: 5;
+  color: $darkfont;
+  background-color: #fff;
+  margin: 1rem;
 }
 h2 {
   margin-bottom: 10px;
+  font-size: $fontSize-s;
 }
 .horLine {
-  width: 50%;
-  transform: translateX(50%);
+  width: 100%;
   border-bottom: 1px solid $grey300;
 }
 
 .heading {
   align-self: center;
+  font-size: $fontSize-l;
 }
 
 .ingredients {
   margin: 30px 0;
+  ul > li {
+    font-size: $fontSize-xs;
+    & > span {
+      margin-left: 1rem;
+    }
+  }
 }
 
 .extraInfo {
@@ -56,8 +38,8 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px 0;
-  font-size: $fontSize-s;
+  margin: 1rem 0;
+  font-size: $fontSize-xs;
   font-weight: $light;
 }
 
@@ -67,6 +49,9 @@ h2 {
   p {
     margin: 10px 0;
     text-align: justify;
+  }
+  ul > li {
+    font-size: $fontSize-xs;
   }
 }
 
@@ -80,18 +65,21 @@ h2 {
 
 .buttons {
   align-self: center;
-  margin: 50px 0;
+  margin: 1rem 0;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   .btn {
-    margin: 0 20px;
+    margin: 1rem;
     position: relative;
     border: none;
-    border-radius: 30px;
+    border-radius: 3rem;
+    width: 12rem;
+    height: 4rem;
+    font-size: $fontSize-s;
   }
   .btnSecondary {
-    width: 120px;
     box-shadow: 0 6px darken($secondary-color, 10%);
     &:hover {
       box-shadow: 0 4px darken($secondary-color, 10%);
@@ -114,7 +102,6 @@ h2 {
     }
   }
   .btnGrey {
-    width: 120px;
     box-shadow: 0 6px darken($grey200, 10%);
     &:hover {
       box-shadow: 0 4px darken($grey200, 10%);
@@ -129,10 +116,84 @@ h2 {
 
 .btnPrint {
   position: absolute;
-  top: 20px;
-  right: 50px;
+  top: 1rem;
+  right: 1rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .quickAdd {
   top: 40%;
+}
+
+@media (min-width: $breakpoint-desktop) {
+  .container {
+    margin: 1rem 10rem;
+    padding: 2rem 5rem;
+    background-color: transparent;
+    &::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      background-color: #fff;
+      z-index: -2;
+      border-radius: 10px;
+      transform: skew(1deg, -1deg) translate(-6%, -2%);
+    }
+    &::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border: 1px solid $primary-color;
+      border-radius: 10px;
+      z-index: -1;
+      border-radius: 10px;
+    }
+    .horLine {
+      width: 50%;
+      transform: translateX(50%);
+    }
+  }
+  .heading {
+    font-size: $fontSize-xl;
+  }
+  h2 {
+    font-size: $fontSize-l;
+  }
+  .extraInfo {
+    font-size: $fontSize-s;
+  }
+  .btnPrint {
+    top: 20px;
+    right: 50px;
+    width: 30px;
+    height: 30px;
+  }
+  .ingredients {
+    ul > li {
+      font-size: $fontSize-s;
+      & > span {
+        margin-left: 1rem;
+      }
+    }
+  }
+  .preparationWrapper {
+    ul > li {
+      font-size: $fontSize-s;
+    }
+  }
+  .buttons {
+    margin: 5rem 0;
+    .btn {
+      width: 15rem;
+      height: 5rem;
+      margin: 1rem 2rem;
+    }
+  }
 }

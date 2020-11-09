@@ -1,17 +1,43 @@
 @import "../../../scss/mixins";
+@import "../../../scss/variables";
 
 .container {
   width: 100%;
-  margin-top: 50px;
-  padding: 0 20px;
+  margin-top: 5rem;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wrapperToday {
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem 0 3rem 0;
+
+  & > h3 {
+    padding-bottom: 1rem;
+    font-size: $fontSize-s;
+  }
+}
+
+.wrapperDays {
   display: grid;
-  grid-template-columns: repeat(3, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
   grid-template-rows: auto;
   justify-content: center;
-  row-gap: 20px;
-  column-gap: 20px;
+  row-gap: 2rem;
+  column-gap: 2rem;
 }
 
 .wrapper {
   align-self: center;
+}
+
+@media (min-width: $breakpoint-desktop) {
+  .wrapperToday {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px 0 50px 0;
+  }
 }

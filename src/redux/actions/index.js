@@ -1,18 +1,20 @@
-export const addRecepiesToPlan = (day, savedRecepies) => {
+export const addRecepiesToPlan = (day, date, savedRecepies) => {
   return {
     type: "ADD_RECEPIES_TO_PLAN",
     payload: {
       day,
+      date,
       savedRecepies,
     },
   };
 };
 
-export const quickAddRecepie = (day, meal, item) => {
+export const quickAddRecepie = (day, date, meal, item) => {
   return {
     type: "QUICK_ADD",
     payload: {
       day,
+      date,
       meal,
       recepie: {
         meal,
@@ -53,6 +55,41 @@ export const displayRecepieDetails = (recepie) => {
     type: "DISPLAY_RECEPIE_DETAILS",
     payload: {
       recepie,
+    },
+  };
+};
+export const generateGroceryList = (list) => {
+  return {
+    type: "GENERATE_NEW_GROCERY_LIST",
+    payload: {
+      list,
+    },
+  };
+};
+
+export const addGroceryList = (list) => {
+  return {
+    type: "ADD_GROCERY_LIST",
+    payload: {
+      list,
+    },
+  };
+};
+
+export const addItemToGroceryList = (item) => {
+  return {
+    type: "ADD_ITEM_TO_GROCERY_LIST",
+    payload: {
+      item,
+    },
+  };
+};
+
+export const deleteItemFromGroceryList = (item) => {
+  return {
+    type: "DELETE_ITEM_FROM_GROCERY_LIST",
+    payload: {
+      item,
     },
   };
 };

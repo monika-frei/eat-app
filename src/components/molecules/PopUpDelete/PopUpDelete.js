@@ -19,10 +19,6 @@ const PopUpDelete = ({ setOpen, deleteRecepie }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return state;
-};
-
 PopUpDelete.propTypes = {
   setOpen: PropTypes.func.isRequired,
   deleteRecepie: PropTypes.func.isRequired,

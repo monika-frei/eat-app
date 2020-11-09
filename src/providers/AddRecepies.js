@@ -3,6 +3,7 @@ import { useState } from "react";
 const AddRecepies = (props) => {
   const [open, setOpen] = useState(false);
   const [day, setDay] = useState("");
+  const [date, setDate] = useState("");
   const [savedRecepies, setSavedRecepies] = useState({
     breakfast: [],
     lunch: [],
@@ -23,15 +24,17 @@ const AddRecepies = (props) => {
     setSavedRecepies({ ...savedRecepies, ...{ [meal]: newArray } });
   };
   const handleDeleteRecepie = (meal, recepie) => {
+    console.log("dziala");
     const filteredRecepies = savedRecepies[meal].filter(
       (item) => item.appUrl !== recepie.appUrl
     );
     setSavedRecepies({ ...savedRecepies, ...{ [meal]: filteredRecepies } });
   };
 
-  const handleEdit = (day, plan) => {
+  const handleEdit = (day, date, plan) => {
     setMeal(meal);
     setDay(day);
+    setDate(date);
     setSavedRecepies(plan[day]);
   };
 
@@ -48,6 +51,8 @@ const AddRecepies = (props) => {
     handleEdit,
     day,
     setDay,
+    date,
+    setDate,
   };
   return props.render(renderProps);
 };
