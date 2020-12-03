@@ -1,26 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { useViewport } from "../../../hooks/index";
 import { motion } from "framer-motion";
 import HamburgerMenu from "../../organisms/HamburgerMenu/HamburgerMenu";
 import WelcomeNavigation from "../WelcomeNavigation/WelcomeNavigation";
 import Sidebar from "../Sidebar/Sidebar";
+import { GlobalContext } from "../../../context/GlobalContext";
 
 const transition = { duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] };
 
 const Header = ({ pageType }) => {
-  const [logged, setLogged] = useState(false);
   const { width } = useViewport();
   const breakpoint = 1260;
   const menuItemsLogged = ["Plan", "Recepies", "Grocery List", "Log Out"];
   const menuItems = ["Log in", "Sign up"];
+  const { userLoggedIn } = useContext(GlobalContext);
+
   return (
     <motion.div exit={{ opacity: 1 }} transition={transition}>
-      {width < breakpoint && logged && (
+      {width < breakpoint && userLoggedIn && (
         <HamburgerMenu menuItems={menuItemsLogged} />
       )}
-      {width >= breakpoint && logged && <Sidebar pageType={pageType} />}
-      {width < breakpoint && !logged && <HamburgerMenu menuItems={menuItems} />}
-      {width >= breakpoint && !logged && <WelcomeNavigation />}
+      {width >= breakpoint && userLoggedIn && <Sidebar pageType={pageType} />}
+      {width < breakpoint && !userLoggedIn && (
+        <HamburgerMenu menuItems={menuItems} />
+      )}
+      {width >= breakpoint && !userLoggedIn && <WelcomeNavigation />}
     </motion.div>
   );
 };

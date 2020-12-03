@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 const Recepie = require("../models/recepie");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.recepies_get_all_recepies = (req, res, next) => {
-  const loggedUserId = req.userData.userId;
-  Recepie.find({ userId: loggedUserId })
+  Recepie.find()
     .select("-__v")
     .exec()
     .then((docs) => {
@@ -16,11 +17,9 @@ exports.recepies_get_all_recepies = (req, res, next) => {
             title: doc.title,
             ingredients: doc.ingredients,
             preparation: doc.preparation,
-            // extra: {
-            //   time: doc.extra.time,
-            //   servings: doc.extra.servings,
-            //   info: doc.extra.info,
-            // },
+            time: doc.time,
+            servings: doc.servings,
+            info: doc.info,
             recepieImage: doc.recepieImage,
             request: {
               type: "GET",
@@ -39,20 +38,24 @@ exports.recepies_get_all_recepies = (req, res, next) => {
 };
 
 exports.recepies_create_recepie = (req, res, next) => {
-  const recepie = new Recepie({
-    _id: new mongoose.Types.ObjectId(),
-    category: req.body.category,
-    title: req.body.title,
-    ingredients: req.body.ingredients,
-    preparation: req.body.preparation,
-    // extra: {
-    //   time: req.body.extra.time,
-    //   servings: req.body.extra.servings,
-    //   info: req.body.extra.info,
-    // },
-    recepieImage: req.file.path,
-    userId: req.userData.userId,
-  });
+  let recepie;
+  try {
+    const doc = JSON.parse(req.body.document);
+    recepie = new Recepie({
+      _id: new mongoose.Types.ObjectId(),
+      category: doc.category,
+      title: doc.title,
+      ingredients: doc.ingredients,
+      preparation: doc.preparation,
+      time: doc.time,
+      servings: doc.servings,
+      info: doc.info,
+      recepieImage: req.file.path,
+      userId: req.userData.userId,
+    });
+  } catch (error) {
+    console.log(error);
+  }
   recepie
     .save()
     .then((result) => {
@@ -65,12 +68,10 @@ exports.recepies_create_recepie = (req, res, next) => {
           title: result.title,
           ingredients: result.ingredients,
           preparation: result.preparation,
-          // extra: {
-          //   time: result.extra.time,
-          //   servings: result.extra.servings,
-          //   info: result.extra.info,
-          // },
-          recepieImage: req.file.path,
+          time: result.time,
+          servings: result.servings,
+          info: result.info,
+          recepieImage: result.recepieImage,
           request: {
             type: "GET",
             url: `http://localhost:4000/recepies/${result._id}`,
@@ -81,7 +82,7 @@ exports.recepies_create_recepie = (req, res, next) => {
     })
     .catch((error) => {
       console.log(error);
-      res.status(500).json({ error });
+      res.status(500).json({ error, requ: req.body });
     });
 };
 
@@ -92,28 +93,10 @@ exports.recepies_get_single_recepie = (req, res, next) => {
     .select("-__v")
     .exec()
     .then((doc) => {
-      if (doc && doc.userId === loggedUserId) {
-        res.status(200).json({
-          _id: doc._id,
-          category: doc.category,
-          title: doc.title,
-          ingredients: doc.ingredients,
-          preparation: doc.preparation,
-          // extra: {
-          //   time: doc.extra.time,
-          //   servings: doc.extra.servings,
-          //   info: doc.extra.info,
-          // },
-          recepieImage: doc.recepieImage,
-          request: {
-            type: "GET",
-            url: "http://localhost:4000/recepies",
-          },
-          userId: doc.userId,
-        });
-        console.log(typeof loggedUserId, typeof doc.userId);
+      if (doc && doc.userId == loggedUserId) {
+        res.send(doc);
       } else {
-        res.status(404).json({ message: "Not valid ID" });
+        res.status(404).json({ message: "No valid ID" });
       }
     })
     .catch((error) => {
@@ -125,21 +108,30 @@ exports.recepies_get_single_recepie = (req, res, next) => {
 exports.recepies_change_recepie = (req, res, next) => {
   // można tutaj zmienić na : --> const updateOpt = {}; for(const opt of re.body){updateOpt[opt.propName]:opt.value} <-- i w set podmienić na obiekt updateOpt (założenie, że req.body jest tablicą)
   const id = req.params.recepieId;
+  let recepie;
+  try {
+    const doc = JSON.parse(req.body.document);
+    recepie = {
+      category: doc.category,
+      title: doc.title,
+      ingredients: doc.ingredients,
+      preparation: doc.preparation,
+      time: doc.time,
+      servings: doc.servings,
+      info: doc.info,
+      recepieImage: req.file.path,
+      userId: req.userData.userId,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+
   Recepie.update(
     { _id: id },
     {
-      $set: {
-        category: req.body.category,
-        title: req.body.title,
-        ingredients: req.body.ingredients,
-        preparation: req.body.preparation,
-        extra: {
-          time: req.body.extra.time,
-          servings: req.body.extra.servings,
-          info: req.body.extra.info,
-        },
-      },
-    }
+      $set: recepie,
+    },
+    { userId: req.userData.userId }
   )
     .exec()
     .then((result) =>

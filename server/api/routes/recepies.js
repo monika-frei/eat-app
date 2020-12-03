@@ -27,7 +27,6 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({
   storage,
-
   fileFilter,
 });
 
@@ -36,7 +35,7 @@ router.get("/", checkAuth, RecepiesController.recepies_get_all_recepies);
 router.post(
   "/",
   checkAuth,
-  upload.single("recepieImage"),
+  upload.single("file"),
   RecepiesController.recepies_create_recepie
 );
 
@@ -46,7 +45,12 @@ router.get(
   RecepiesController.recepies_get_single_recepie
 );
 
-router.patch("/:recepieId", RecepiesController.recepies_change_recepie);
+router.patch(
+  "/:recepieId",
+  checkAuth,
+  upload.single("file"),
+  RecepiesController.recepies_change_recepie
+);
 
 router.delete("/:recepieId", RecepiesController.recepies_delete_recepie);
 

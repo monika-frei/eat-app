@@ -1,4 +1,5 @@
 @import "../../../scss/variables";
+@import "../../../scss/mixins";
 
 .button {
   width: 180px;
@@ -10,7 +11,7 @@
   border-width: 2px;
   border-style: solid;
   cursor: pointer;
-  position: relative;
+  @include button-hover-move-down;
 }
 
 .bgPlan {

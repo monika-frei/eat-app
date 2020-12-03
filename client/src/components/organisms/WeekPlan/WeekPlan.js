@@ -1,64 +1,47 @@
-import React from "react";
+import React, { useContext } from "react";
 import DayCard from "../../organisms/DayCard/DayCard";
 import styles from "./WeekPlan.module.scss";
 import moment from "moment";
+import { GlobalContext } from "../../../context/GlobalContext";
 
-const WeekPlan = ({ toggle, handleEdit, handleDelete }) => {
-  const today = moment().format("dddd").toLowerCase();
-  const todayDate = moment().format("YYYY-MM-DD");
-  const days = [
-    {
-      day: moment().add(1, "days").format("dddd").toLowerCase(),
-      date: moment().add(1, "days").format("YYYY-MM-DD"),
-    },
-    {
-      day: moment().add(2, "days").format("dddd").toLowerCase(),
-      date: moment().add(2, "days").format("YYYY-MM-DD"),
-    },
-    {
-      day: moment().add(3, "days").format("dddd").toLowerCase(),
-      date: moment().add(3, "days").format("YYYY-MM-DD"),
-    },
-    {
-      day: moment().add(4, "days").format("dddd").toLowerCase(),
-      date: moment().add(4, "days").format("YYYY-MM-DD"),
-    },
-    {
-      day: moment().add(5, "days").format("dddd").toLowerCase(),
-      date: moment().add(5, "days").format("YYYY-MM-DD"),
-    },
-    {
-      day: moment().add(6, "days").format("dddd").toLowerCase(),
-      date: moment().add(6, "days").format("YYYY-MM-DD"),
-    },
-  ];
-  return (
-    <div className={styles.container}>
-      <div className={styles.wrapperToday}>
-        <h3>Today's plan</h3>
-        <DayCard
-          day={today}
-          date={todayDate}
-          toggle={toggle}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-        />
-      </div>
-      <div className={styles.wrapperDays}>
-        {days.map((day) => (
-          <div key={day.day} className={styles.wrapper}>
+const WeekPlan = () => {
+  const { plan } = useContext(GlobalContext);
+  const todayDate = moment().format("DD-MM-YYYY");
+  const todayPlan = plan.filter((day) => (day.date === todayDate ? day : null));
+
+  if (plan.length > 0) {
+    return (
+      <div className={styles.container}>
+        {todayPlan.length !== 0 && (
+          <div className={styles.wrapperToday}>
+            <h3>Today's plan</h3>
             <DayCard
-              day={day.day}
-              date={day.date}
-              toggle={toggle}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
+              day={todayPlan[0].day}
+              date={todayPlan[0].date}
+              plan={todayPlan[0].plan}
             />
           </div>
-        ))}
+        )}
+        <div className={styles.wrapperDays}>
+          {plan &&
+            plan
+              .filter((day) => (day.date !== todayDate ? day : null))
+              .map((day) => (
+                <div key={day._id} className={styles.wrapper}>
+                  <DayCard
+                    day={day.day}
+                    date={day.date}
+                    plan={day.plan}
+                    planId={day._id}
+                  />
+                </div>
+              ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return <h1>You have no plans set yet!</h1>;
+  }
 };
 
 export default WeekPlan;

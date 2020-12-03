@@ -55,9 +55,11 @@
   font-weight: $light;
   font-size: $fontSize-xs;
 }
-
-.button {
+.buttons {
   align-self: flex-end;
+}
+.button {
+  margin-left: 1rem;
   background-repeat: no-repeat;
 }
 

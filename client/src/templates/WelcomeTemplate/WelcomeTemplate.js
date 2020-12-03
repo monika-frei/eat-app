@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "./WelcomeTemplate.module.scss";
 import Header from "../../components/organisms/Header/Header";
 

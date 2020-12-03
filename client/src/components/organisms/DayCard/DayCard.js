@@ -1,50 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import Card from "../../molecules/Card/Card";
-import ButtonIconSmall from "../../atoms/ButtonIconSmall/ButtonIconSmall";
 import styles from "./DayCard.module.scss";
-import { connect } from "react-redux";
+import { meals } from "../../../constans/index";
+import { Link } from "react-router-dom";
 
-const DayCard = ({
-  day,
-  toggle,
-  handleEdit,
-  plan = [],
-  date,
-  handleDelete,
-}) => {
-  const meals = ["breakfast", "lunch", "dinner", "snacks"];
+const DayCard = ({ day, plan = [], date, planId }) => {
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.header}>
-        <div>
-          <h2 className={styles.heading}>{day}</h2>
-          <p className={styles.date}>{date}</p>
-        </div>
-        {handleEdit && (
-          <ButtonIconSmall
-            bgImage="buttonAdd"
-            btnSize="btn30"
-            onClick={() => {
-              toggle();
-              handleEdit(day, date, plan);
-            }}
-            type="button"
-            custom={styles.button}
-          ></ButtonIconSmall>
-        )}
+        <Link to={`/plan/${planId}`}>
+          <div>
+            <h2 className={styles.heading}>{day}</h2>
+            <p className={styles.date}>{date}</p>
+          </div>
+        </Link>
       </div>
-
-      {meals.map((meal) => (
-        <Card meal={meal} savedRecepies={plan[day] ? plan[day][meal] : []} />
+      {meals.map((meal, index) => (
+        <Card key={index} meal={meal} savedRecepies={plan ? plan[meal] : []} />
       ))}
-    </div>
+    </section>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    plan: state.plan,
-  };
-};
-
-export default connect(mapStateToProps)(DayCard);
+export default DayCard;

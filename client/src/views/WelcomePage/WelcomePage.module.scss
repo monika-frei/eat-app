@@ -2,16 +2,11 @@
 @import "../../scss/mixins";
 
 .container {
-  margin: 0 auto;
-  width: 90vw;
-  height: 70%;
-  border: 3px solid darken($tertiary-color, 10%);
-  border-radius: 15px;
+  @include mobile-welcome-form-border-wrapper;
   transition: all 0.8s;
   transition-timing-function: cubic-bezier(0.43, 0.13, 0.23, 0.96);
   position: relative;
   z-index: 1;
-  transform: translateY(12rem);
 }
 .wrapper {
   @include flex-vertical-center;
@@ -76,7 +71,7 @@
 
 @media (min-width: $breakpoint-desktop) {
   .container {
-    transform: translateY(0);
+    @include desktop-welcome-form-border-wrapper;
   }
   .image {
     width: 800px;
