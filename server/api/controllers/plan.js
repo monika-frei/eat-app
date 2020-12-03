@@ -3,7 +3,8 @@ const DayPlan = require("../models/plan");
 
 exports.plan_get_all = (req, res, next) => {
   const loggedUserId = req.userData.userId;
-  DayPlan.find({ userId: loggedUserId })
+  // { userId: loggedUserId } wkleić w find
+  DayPlan.find()
     .select("-__v")
     .exec()
     .then((docs) => {
@@ -14,10 +15,18 @@ exports.plan_get_all = (req, res, next) => {
             _id: doc._id,
             day: doc.day,
             date: doc.date,
-            breakfast: doc.breakfast,
-            lunch: doc.lunch,
-            dinner: doc.dinner,
-            snacks: doc.snacs,
+            plan: {
+              breakfast: doc.plan.breakfast,
+              lunch: doc.plan.lunch,
+              dinner: doc.plan.dinner,
+              snacks: doc.plan.snacks,
+            },
+            recepies: [
+              ...doc.plan.breakfast.map((item) => item._id),
+              ...doc.plan.lunch.map((item) => item._id),
+              ...doc.plan.dinner.map((item) => item._id),
+              ...doc.plan.snacks.map((item) => item._id),
+            ],
             request: {
               type: "GET",
               url: `http://localhost:4000/plan/${doc._id}`,
@@ -40,10 +49,12 @@ exports.plan_post = (req, res, next) => {
     _id: new mongoose.Types.ObjectId(),
     day: req.body.day,
     date: req.body.date,
-    breakfast: req.body.recepies.breakfast,
-    lunch: req.body.recepies.lunch,
-    dinner: req.body.recepies.dinner,
-    snacks: req.body.recepies.snacks,
+    plan: {
+      breakfast: req.body.recepies.breakfast,
+      lunch: req.body.recepies.lunch,
+      dinner: req.body.recepies.dinner,
+      snacks: req.body.recepies.snacks,
+    },
     userId: req.userData.userId,
   });
 
@@ -56,16 +67,18 @@ exports.plan_post = (req, res, next) => {
           _id: result._id,
           day: result.day,
           date: result.date,
-          breakfast: result.breakfast,
-          lunch: result.lunch,
-          dinner: result.dinner,
-          snacks: result.snacks,
+          plan: {
+            breakfast: result.plan.breakfast,
+            lunch: result.plan.lunch,
+            dinner: result.plan.dinner,
+            snacks: result.plan.snacks,
+          },
+          userId: result.userId,
         },
         request: {
           type: "GET",
           url: `http://localhost:4000/plan/${result._id}`,
         },
-        userId: result.userId,
       });
     })
     .catch((error) => {
@@ -82,13 +95,7 @@ exports.plan_get_single = (req, res, next) => {
     .exec()
     .then((doc) => {
       if (doc && doc.userId === loggedUserId) {
-        res.status(200).json({
-          dayPlan: doc,
-          request: {
-            type: "GET",
-            url: "http://localhost:4000/plan",
-          },
-        });
+        res.send(doc);
       } else {
         res.status(404).json({ message: "No valid ID" });
       }
@@ -107,10 +114,12 @@ exports.plan_patch = (req, res, next) => {
       $set: {
         day: req.body.day,
         date: req.body.date,
-        breakfast: req.body.breakfast,
-        lunch: req.body.lunch,
-        dinner: req.body.dinner,
-        snacks: req.body.snacks,
+        plan: {
+          breakfast: req.body.plan.breakfast,
+          lunch: req.body.plan.lunch,
+          dinner: req.body.plan.dinner,
+          snacks: req.body.plan.snacks,
+        },
       },
     }
   )
@@ -131,8 +140,8 @@ exports.plan_patch = (req, res, next) => {
 };
 
 exports.plan_delete = (req, res, next) => {
-  const id = req.params.dayPlanId;
-  DayPlan.remove({ _id: id })
+  const planId = req.params.dayPlanId;
+  DayPlan.findByIdAndDelete(planId)
     .exec()
     .then((result) =>
       res.status(200).json({

@@ -1,8 +1,10 @@
 @import "../../scss/variables";
+@import "../../scss/mixins";
 
 .wrapper {
   min-height: 80vh;
   width: 100%;
+  padding-top: 3rem;
 }
 
 .heading {
@@ -10,33 +12,27 @@
 }
 
 .buttonWrapper {
-  position: absolute;
-  right: 4rem;
-  top: 10rem;
+  @include button-icon-position-mobile;
 }
 
 .button {
-  position: relative;
-
+  @include button-hover-move-down;
   &:hover {
     background-color: darken($secondary-color, 5%);
-    top: 3px;
-  }
-  &:active {
-    top: 6px;
   }
 }
 
 @media (min-width: $breakpoint-tablet) {
   .buttonWrapper {
-    right: 5rem;
-    top: 12rem;
+    @include button-icon-position-tablet;
   }
 }
 
 @media (min-width: $breakpoint-desktop) {
+  .wrapper {
+    padding-top: 5rem;
+  }
   .buttonWrapper {
-    right: 5rem;
-    top: 5rem;
+    @include button-icon-position-desktop;
   }
 }

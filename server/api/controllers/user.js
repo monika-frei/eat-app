@@ -52,6 +52,12 @@ exports.user_create_user = (req, res, next) => {
     });
 };
 
+exports.user_logout_user = (req, res, next) => {
+  req.logout();
+  res.sendStatus(200);
+  res.redirect("/");
+};
+
 exports.user_login_user = (req, res, next) => {
   User.find({ email: req.body.email })
     .exec()
@@ -81,6 +87,7 @@ exports.user_login_user = (req, res, next) => {
           res.status(200).json({
             message: "Auth succeeded",
             token,
+            userId: jwt.verify(token, "secret").userId,
           });
         }
       });

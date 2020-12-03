@@ -1,71 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import styles from "./QuickAdd.module.scss";
 import ButtonIconSmall from "../../atoms/ButtonIconSmall/ButtonIconSmall";
-import AddRecepies from "../../../providers/AddRecepies";
 import cx from "classnames";
-import { connect } from "react-redux";
-import { quickAddRecepie as quickAddAction } from "../../../redux/actions/index";
+import moment from "moment";
+import DatePicker from "react-date-picker";
+import { PlanContext } from "../../../context/PlanContext";
+import { GlobalContext } from "../../../context/GlobalContext";
 
-const QuickAdd = ({ item, setOpen, quickAdd, custom }) => {
-  const [day, setDay] = useState("");
+const QuickAdd = ({ item, setOpen, custom }) => {
+  const { addRecepieToPlan } = useContext(PlanContext);
+  const [date, setDate] = useState("");
   const [meal, setMeal] = useState("");
   const wrapperClass = cx(styles.wrapper, custom);
-  const handleAddRecepie = (day, meal, item) => {
-    quickAdd(day, meal, item);
+
+  const handleAddRecepie = (date, meal, item) => {
+    const newPlanItem = {
+      _id: item._id,
+      title: item.title,
+    };
+    addRecepieToPlan(date, meal, newPlanItem);
+    setOpen(false);
   };
   return (
-    <AddRecepies
-      render={() => (
-        <div className={wrapperClass}>
-          <h2 className={styles.heading}>Add recepie to your plan</h2>
-          <div>
-            <p className={styles.paragraph}>
-              Selected recepie: <b>{item.title}</b>
-            </p>
-            <select
-              name="day"
-              className={styles.select}
-              value={day}
-              onChange={(event) => setDay(event.target.value)}
-            >
-              <option value="">select a day</option>
-              <option value="monday">Monday</option>
-              <option value="tuesday">Tuesday</option>
-              <option value="wednesday">Wednesday</option>
-              <option value="thursday">Thursday</option>
-              <option value="friday">Friday</option>
-              <option value="saturday">Saturday</option>
-              <option value="sunday">Sunday</option>
-            </select>
-            <select
-              name="day"
-              className={styles.select}
-              value={meal}
-              onChange={(event) => setMeal(event.target.value)}
-            >
-              <option value="">select a meal</option>
-              <option value="breakfast">Breakfast</option>
-              <option value="lunch">Lunch</option>
-              <option value="dinner">Dinner</option>
-              <option value="snacks">Snacks</option>
-            </select>
-          </div>
-          <div className={styles.buttons}>
-            <ButtonIconSmall
-              bgImage="buttonDelete"
-              btnSize="btn20"
-              onClick={() => setOpen(false)}
-            />
-            <ButtonIconSmall
-              bgImage="buttonAdd"
-              btnSize="btn30"
-              onClick={() => handleAddRecepie(day, meal, item)}
-            />
-          </div>
+    <div className={wrapperClass}>
+      <h2 className={styles.heading}>Add recepie to your plan</h2>
+      <div>
+        <p className={styles.paragraph}>
+          Selected recepie: <b>{item.title}</b>
+        </p>
+        <div>
+          <DatePicker
+            onChange={setDate}
+            value={date}
+            format={"y-MM-dd"}
+            minDate={new Date()}
+            className={styles.datePicker}
+            calendarClassName={styles.calendar}
+            required={true}
+          />
+          {date && (
+            <p className={styles.displayDay}>{moment(date).format("dddd")}</p>
+          )}
         </div>
-      )}
-    />
+        <select
+          name="meal"
+          className={styles.select}
+          value={meal}
+          onChange={(event) => setMeal(event.target.value)}
+        >
+          <option value="">select a meal</option>
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+          <option value="snacks">Snacks</option>
+        </select>
+      </div>
+      <div className={styles.buttons}>
+        <ButtonIconSmall
+          bgImage="buttonDelete"
+          btnSize="btn20"
+          onClick={() => setOpen(false)}
+        />
+        <ButtonIconSmall
+          bgImage="buttonAdd"
+          btnSize="btn30"
+          onClick={() => handleAddRecepie(date, meal, item)}
+        />
+      </div>
+    </div>
   );
 };
 
@@ -75,14 +78,4 @@ QuickAdd.propTypes = {
   quickAdd: PropTypes.func,
 };
 
-const mapStateToProps = (state) => {
-  return state;
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    quickAdd: (day, meal, item) => dispatch(quickAddAction(day, meal, item)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(QuickAdd);
+export default QuickAdd;

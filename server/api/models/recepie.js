@@ -1,18 +1,28 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
+const ingredientSchema = new Schema({
+  id: Number,
+  title: String,
+  amount: String,
+  unit: String,
+});
+
+const preparationSchema = new Schema({
+  step: Number,
+  content: String,
+});
+
 const recepieSchema = new Schema({
   _id: Schema.Types.ObjectId,
-  category: [{ type: String, required: true }],
+  category: [String],
   title: { type: String, required: true },
-  ingredients: [{ type: String, required: true }],
-  preparation: [{ type: Schema.Types.Mixed, required: true }],
-  // extra: {
-  //   time: { type: String, required: false },
-  //   servings: { type: String, required: false },
-  //   info: { type: String, required: false },
-  // },
-  recepieImage: { type: String, required: false },
+  ingredients: [ingredientSchema],
+  preparation: [preparationSchema],
+  time: String,
+  servings: String,
+  info: String,
+  recepieImage: String,
   userId: { type: String, ref: "User" },
 });
 

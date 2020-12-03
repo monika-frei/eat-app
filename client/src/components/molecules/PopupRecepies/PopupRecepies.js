@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import styles from "./PopupRecepies.module.scss";
 import Search from "../../atoms/Search/Search";
+import { RecepiesContext } from "../../../context/RecepiesContext";
 
-const PopupRecepies = ({ recepies, meal, handleSaveRecepie, handleClose }) => {
+const PopupRecepies = ({ meal, handleSaveRecepie, handleClose }) => {
   const [inputContent, setInputContent] = useState("");
+  const { getAllRecepies, recepies } = useContext(RecepiesContext);
+
+  useEffect(() => {
+    getAllRecepies();
+  }, []);
+
   const handleInputChange = (e) => {
     setInputContent(e.target.value);
   };
+
   return (
     <div className={styles.recepies}>
       <button
@@ -23,22 +30,13 @@ const PopupRecepies = ({ recepies, meal, handleSaveRecepie, handleClose }) => {
       />
       <ul className={styles.list}>
         {recepies
-          .filter((item) => item.title.includes(inputContent))
+          .filter((item) => item.title.includes(inputContent.toLowerCase()))
           .map((item) => {
-            const appUrl = `/recepies/:${item.id}`;
-            const recepie = {
-              meal,
-              id: item.id,
-              title: item.title,
-              ingredients: item.ingredients,
-              appUrl,
-            };
             return (
-              <li className={styles.listItem} key={appUrl}>
+              <li className={styles.listItem} key={item._id}>
                 <button
-                  data-appUrl={appUrl}
                   data-title={item.title}
-                  onClick={() => handleSaveRecepie(recepie)}
+                  onClick={() => handleSaveRecepie(item, meal)}
                   type="button"
                 >
                   {item.title}
@@ -51,18 +49,4 @@ const PopupRecepies = ({ recepies, meal, handleSaveRecepie, handleClose }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const { recepies } = state;
-  return {
-    recepies,
-  };
-};
-
-PopupRecepies.propTypes = {
-  recepies: PropTypes.array.isRequired,
-  meal: PropTypes.string.isRequired,
-  handleSaveRecepie: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired,
-};
-
-export default connect(mapStateToProps)(PopupRecepies);
+export default PopupRecepies;

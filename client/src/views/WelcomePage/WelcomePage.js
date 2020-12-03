@@ -7,9 +7,6 @@ import Paragraph from "../../components/atoms/Paragraph/Paragraph";
 import Button from "../../components/atoms/Button/Button";
 import { Link } from "react-router-dom";
 import { routes } from "../../routes";
-import { motion } from "framer-motion";
-
-const transition = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
 
 const WelcomePage = () => {
   const [isOpenPage, setOpenPage] = useState(false);

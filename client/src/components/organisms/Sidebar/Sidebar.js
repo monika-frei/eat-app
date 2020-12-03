@@ -5,10 +5,18 @@ import { NavLink } from "react-router-dom";
 import Logo from "../../atoms/Logo/Logo";
 import { motion } from "framer-motion";
 import SidebarButton from "../../atoms/SidebarButton/SidebarButton";
+import axios from "axios";
 
 const transition = { duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] };
 
 const Sidebar = ({ pageType }) => {
+  const handleLogOut = () => {
+    axios
+      .get("http://localhost:4000/user/logout")
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <motion.div
       exit={{ opacity: 1 }}
@@ -50,7 +58,9 @@ const Sidebar = ({ pageType }) => {
           </li>
           <li className={styles.link}>
             <NavLink to="/grocerylist">
-              <SidebarButton border="borderGrey">Log out</SidebarButton>
+              <SidebarButton border="borderGrey" onClick={handleLogOut}>
+                Log out
+              </SidebarButton>
             </NavLink>
           </li>
         </ul>

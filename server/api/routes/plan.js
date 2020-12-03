@@ -11,6 +11,6 @@ router.get("/:dayPlanId", checkAuth, planController.plan_get_single);
 
 router.patch("/:dayPlanId", planController.plan_patch);
 
-router.delete("/:dayPlanId", planController.plan_delete);
+router.delete("/:dayPlanId", checkAuth, planController.plan_delete);
 
 module.exports = router;

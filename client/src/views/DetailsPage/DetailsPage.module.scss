@@ -9,6 +9,17 @@
   background-color: #fff;
   margin: 1rem;
 }
+.header {
+  background-position: 25% 25%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 1rem 1rem 0 0;
+  background-blend-mode: saturation;
+  .headerVisible {
+    background-color: rgba($color: #fff, $alpha: 0.6);
+    padding: 1rem 0;
+  }
+}
 h2 {
   margin-bottom: 10px;
   font-size: $fontSize-s;
@@ -129,7 +140,7 @@ h2 {
 @media (min-width: $breakpoint-desktop) {
   .container {
     margin: 1rem 10rem;
-    padding: 2rem 5rem;
+    // padding: 2rem 5rem;
     background-color: transparent;
     &::before {
       content: "";
@@ -159,6 +170,9 @@ h2 {
       width: 50%;
       transform: translateX(50%);
     }
+  }
+  .recepie {
+    padding: 0 5rem;
   }
   .heading {
     font-size: $fontSize-xl;

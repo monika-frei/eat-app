@@ -6,7 +6,7 @@ import ButtonIconSmall from "../../components/atoms/ButtonIconSmall/ButtonIconSm
 import { pageType } from "../../constans/index";
 import cx from "classnames";
 
-const FormAddTemplate = ({ children, classOpen, toggle }) => {
+const FormAddTemplate = ({ children, classOpen, toggle, clearForm }) => {
   const containerClass = cx(styles.container, classOpen);
   return (
     <PageType
@@ -21,7 +21,9 @@ const FormAddTemplate = ({ children, classOpen, toggle }) => {
             bgImage="buttonDelete"
             btnSize="btn20"
             custom={styles.delete}
-            onClick={() => toggle(false)}
+            onClick={() => {
+              toggle(false);
+            }}
           />
         </div>
       )}

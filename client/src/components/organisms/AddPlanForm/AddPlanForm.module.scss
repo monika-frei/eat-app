@@ -14,6 +14,27 @@
     cursor: pointer;
     margin-bottom: 2rem;
   }
+  .datePicker {
+    background-color: lighten($secondary-color, 30%);
+    input[type="number"] {
+      border: none;
+      border-radius: 0;
+      padding: 1rem;
+      background-color: transparent;
+      height: 2rem;
+    }
+  }
+  .calendar {
+    border: 1px solid $secondary-color;
+    &:first-child {
+      background-color: white;
+    }
+  }
+  .displayDay {
+    margin-top: 1rem;
+    color: $secondary-color;
+    font-weight: $semi-bold;
+  }
 
   & > option {
     background-color: white;

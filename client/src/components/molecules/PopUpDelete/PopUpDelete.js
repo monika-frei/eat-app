@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import styles from "./PopUpDelete.module.scss";
 import Button from "../../atoms/Button/Button";
 
-const PopUpDelete = ({ setOpen, deleteRecepie }) => {
+const PopUpDelete = ({ setOpen, deleteItem }) => {
   return (
     <div className={styles.container}>
-      <h3>Do you really want to delete this recepie?</h3>
+      <h3>Do you really want to delete this item?</h3>
       <div className={styles.buttons}>
-        <Button bgColor="bgGrey" custom={styles.button} onClick={deleteRecepie}>
+        <Button bgColor="bgGrey" custom={styles.button} onClick={deleteItem}>
           Yes
         </Button>
         <Button bgColor="bgSecondary" custom={styles.button} onClick={setOpen}>

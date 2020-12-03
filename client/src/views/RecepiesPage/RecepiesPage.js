@@ -10,7 +10,8 @@ import ButtonIcon from "../../components/atoms/ButtonIcon/ButtonIcon";
 import Search from "../../components/atoms/Search/Search";
 import ToggleOpen from "../../providers/ToggleOpen";
 import QuickAdd from "../../components/molecules/QuickAdd/QuickAdd";
-import AddRecepieForm from "../../components/organisms/AddRecepieForm/AddRecepieForm";
+import AddRecepie from "../../components/organisms/AddRecepie/AddRecepie";
+import PlanContextProvider from "../../context/PlanContext";
 
 const RecepiesPage = () => {
   const [selectedMeal, setSelectedMeal] = useState("all");
@@ -74,24 +75,21 @@ const RecepiesPage = () => {
             </div>
           </div>
           {isOpen && (
-            <QuickAdd
-              item={activeRecepie}
-              setOpen={setOpen}
-              custom={styles.quickAdd}
-            />
+            <PlanContextProvider>
+              <QuickAdd
+                item={activeRecepie}
+                setOpen={setOpen}
+                custom={styles.quickAdd}
+              />
+            </PlanContextProvider>
           )}
           {classOpen === "activeForm" && (
-            <AddRecepieForm classOpen={classOpen} toggle={toggle} />
+            <AddRecepie classOpen={classOpen} toggle={toggle} />
           )}
         </UserPageTemplate>
       )}
     />
   );
-};
-
-RecepiesPage.propTypes = {
-  toggle: PropTypes.func.isRequired,
-  classOpen: PropTypes.bool,
 };
 
 export default RecepiesPage;
