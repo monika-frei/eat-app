@@ -4,7 +4,7 @@ export const routes = {
   signup: "/signup",
   plan: "/plan",
   dayPlan: "/plan/:id",
-  recepies: "/recepies",
-  recepie: "/recepies/:id",
+  recipes: "/recipes",
+  recipe: "/recipes/:id",
   list: "/grocerylist",
 };

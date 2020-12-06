@@ -1,6 +1,6 @@
 export const pageType = {
   plan: "plan",
-  recepies: "recepies",
+  recipes: "recipes",
   groceryList: "groceryList",
 };
 

@@ -4,11 +4,11 @@
 .wrapper {
   min-height: 80vh;
   width: 100%;
-  padding-top: 3rem;
+  padding-top: 1rem;
 }
 
 .heading {
-  color: $darkfont;
+  @include mobile-page-heading;
 }
 
 .buttonWrapper {
@@ -23,6 +23,13 @@
 }
 
 @media (min-width: $breakpoint-tablet) {
+  .wrapper {
+    padding-top: 3rem;
+  }
+
+  .heading {
+    font-size: $fontSize-xl;
+  }
   .buttonWrapper {
     @include button-icon-position-tablet;
   }

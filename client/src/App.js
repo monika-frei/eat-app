@@ -7,12 +7,12 @@ import { routes } from "./routes";
 import AuthPage from "./views/AuthPage/AuthPage";
 import WelcomePage from "./views/WelcomePage/WelcomePage";
 import PlanPage from "./views/PlanPage/PlanPage";
-import RecepiesPage from "./views/RecepiesPage/RecepiesPage";
+import RecipesPage from "./views/RecipesPage/RecipesPage";
 import GroceryListPage from "./views/GroceryListPage/GroceryListPage";
 import DetailsPage from "./views/DetailsPage/DetailsPage";
 import GlobalContextProvider from "./context/GlobalContext";
 import PlanContextProvider from "./context/PlanContext";
-import RecepiesContextProvider from "./context/RecepiesContext";
+import RecipesContextProvider from "./context/RecipesContext";
 import DetailedDayPlan from "./views/DetailedDayPlan/DetailedDayPlan";
 
 function App() {
@@ -22,38 +22,38 @@ function App() {
         <Router>
           <Route
             render={({ location }) => (
-              <AnimatePresence initial={false} exitBeforeEnter>
-                <Switch location={location} key={location.key}>
-                  <Route exact path={routes.home} component={WelcomePage} />
-                  <Route path={routes.signup} component={AuthPage} />
-                  <Route path={routes.login} component={AuthPage} />
-                  <Route exact path={routes.plan}>
-                    <PlanContextProvider>
-                      <PlanPage />
-                    </PlanContextProvider>
-                  </Route>
-                  <Route exact path={routes.dayPlan}>
-                    <PlanContextProvider>
-                      <DetailedDayPlan />
-                    </PlanContextProvider>
-                  </Route>
-                  <Route exact path={routes.recepies}>
-                    <RecepiesContextProvider>
-                      <RecepiesPage />
-                    </RecepiesContextProvider>
-                  </Route>
-                  <Route exact path={routes.recepie}>
-                    <RecepiesContextProvider>
-                      <DetailsPage />
-                    </RecepiesContextProvider>
-                  </Route>
-                  <Route exact path={routes.list}>
-                    <RecepiesContextProvider>
-                      <GroceryListPage />
-                    </RecepiesContextProvider>
-                  </Route>
-                </Switch>
-              </AnimatePresence>
+              // <AnimatePresence initial={false} exitBeforeEnter>
+              <Switch location={location} key={location.key}>
+                <Route exact path={routes.home} component={WelcomePage} />
+                <Route path={routes.signup} component={AuthPage} />
+                <Route exact path={routes.login} component={AuthPage} />
+                <Route exact path={routes.plan}>
+                  <PlanContextProvider>
+                    <PlanPage />
+                  </PlanContextProvider>
+                </Route>
+                <Route exact path={routes.dayPlan}>
+                  <PlanContextProvider>
+                    <DetailedDayPlan />
+                  </PlanContextProvider>
+                </Route>
+                <Route exact path={routes.recipes}>
+                  <RecipesContextProvider>
+                    <RecipesPage />
+                  </RecipesContextProvider>
+                </Route>
+                <Route exact path={routes.recipe}>
+                  <RecipesContextProvider>
+                    <DetailsPage />
+                  </RecipesContextProvider>
+                </Route>
+                <Route exact path={routes.list}>
+                  <RecipesContextProvider>
+                    <GroceryListPage />
+                  </RecipesContextProvider>
+                </Route>
+              </Switch>
+              // </AnimatePresence>
             )}
           />
         </Router>

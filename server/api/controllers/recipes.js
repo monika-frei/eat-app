@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
-const Recepie = require("../models/recepie");
+const Recipe = require("../models/recipe");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-exports.recepies_get_all_recepies = (req, res, next) => {
-  Recepie.find()
+exports.recipes_get_all_recipes = (req, res, next) => {
+  Recipe.find()
     .select("-__v")
     .exec()
     .then((docs) => {
       const response = {
         count: docs.length,
-        recepies: docs.map((doc) => {
+        recipes: docs.map((doc) => {
           return {
             _id: doc._id,
             category: doc.category,
@@ -20,10 +20,10 @@ exports.recepies_get_all_recepies = (req, res, next) => {
             time: doc.time,
             servings: doc.servings,
             info: doc.info,
-            recepieImage: doc.recepieImage,
+            recipeImage: doc.recipeImage,
             request: {
               type: "GET",
-              url: `http://localhost:4000/recepies/${doc._id}`,
+              url: `http://localhost:4000/recipes/${doc._id}`,
             },
             userId: doc.userId,
           };
@@ -37,11 +37,11 @@ exports.recepies_get_all_recepies = (req, res, next) => {
     });
 };
 
-exports.recepies_create_recepie = (req, res, next) => {
-  let recepie;
+exports.recipes_create_recipe = (req, res, next) => {
+  let recipe;
   try {
     const doc = JSON.parse(req.body.document);
-    recepie = new Recepie({
+    recipe = new Recipe({
       _id: new mongoose.Types.ObjectId(),
       category: doc.category,
       title: doc.title,
@@ -50,19 +50,19 @@ exports.recepies_create_recepie = (req, res, next) => {
       time: doc.time,
       servings: doc.servings,
       info: doc.info,
-      recepieImage: req.file.path,
+      recipeImage: req.file.path,
       userId: req.userData.userId,
     });
   } catch (error) {
     console.log(error);
   }
-  recepie
+  recipe
     .save()
     .then((result) => {
       console.log(result);
       res.status(201).json({
-        message: "Created recepie successfuly",
-        createdRecepie: {
+        message: "Created recipe successfuly",
+        createdRecipe: {
           _id: result._id,
           category: result.category,
           title: result.title,
@@ -71,10 +71,10 @@ exports.recepies_create_recepie = (req, res, next) => {
           time: result.time,
           servings: result.servings,
           info: result.info,
-          recepieImage: result.recepieImage,
+          recipeImage: result.recipeImage,
           request: {
             type: "GET",
-            url: `http://localhost:4000/recepies/${result._id}`,
+            url: `http://localhost:4000/recipes/${result._id}`,
           },
           userId: result.userId,
         },
@@ -86,14 +86,13 @@ exports.recepies_create_recepie = (req, res, next) => {
     });
 };
 
-exports.recepies_get_single_recepie = (req, res, next) => {
-  const id = req.params.recepieId;
-  const loggedUserId = req.userData.userId;
-  Recepie.findById(id)
+exports.recipes_get_single_recipe = (req, res, next) => {
+  const id = req.params.recipeId;
+  Recipe.findById(id)
     .select("-__v")
     .exec()
     .then((doc) => {
-      if (doc && doc.userId == loggedUserId) {
+      if (doc) {
         res.send(doc);
       } else {
         res.status(404).json({ message: "No valid ID" });
@@ -105,13 +104,13 @@ exports.recepies_get_single_recepie = (req, res, next) => {
     });
 };
 
-exports.recepies_change_recepie = (req, res, next) => {
+exports.recipes_change_recipe = (req, res, next) => {
   // można tutaj zmienić na : --> const updateOpt = {}; for(const opt of re.body){updateOpt[opt.propName]:opt.value} <-- i w set podmienić na obiekt updateOpt (założenie, że req.body jest tablicą)
-  const id = req.params.recepieId;
-  let recepie;
+  const id = req.params.recipeId;
+  let recipe;
   try {
     const doc = JSON.parse(req.body.document);
-    recepie = {
+    recipe = {
       category: doc.category,
       title: doc.title,
       ingredients: doc.ingredients,
@@ -119,27 +118,27 @@ exports.recepies_change_recepie = (req, res, next) => {
       time: doc.time,
       servings: doc.servings,
       info: doc.info,
-      recepieImage: req.file.path,
+      recipeImage: req.file.path,
       userId: req.userData.userId,
     };
   } catch (error) {
     console.log(error);
   }
 
-  Recepie.update(
+  Recipe.update(
     { _id: id },
     {
-      $set: recepie,
+      $set: recipe,
     },
     { userId: req.userData.userId }
   )
     .exec()
     .then((result) =>
       res.status(200).json({
-        message: "Recepie updated",
+        message: "Recipe updated",
         request: {
           type: "GET",
-          url: `http://localhost:4000/recepies/${id}`,
+          url: `http://localhost:4000/recipes/${id}`,
         },
       })
     )
@@ -149,13 +148,13 @@ exports.recepies_change_recepie = (req, res, next) => {
     });
 };
 
-exports.recepies_delete_recepie = (req, res, next) => {
+exports.recipes_delete_recipe = (req, res, next) => {
   const id = req.params.recepieId;
-  Recepie.remove({ _id: id })
+  Recipe.remove({ _id: id })
     .exec()
     .then((result) =>
       res.status(200).json({
-        message: "Recepie deleted",
+        message: "Recipe deleted",
       })
     )
     .catch((error) => {

@@ -13,7 +13,7 @@ const preparationSchema = new Schema({
   content: String,
 });
 
-const recepieSchema = new Schema({
+const recipeSchema = new Schema({
   _id: Schema.Types.ObjectId,
   category: [String],
   title: { type: String, required: true },
@@ -22,8 +22,8 @@ const recepieSchema = new Schema({
   time: String,
   servings: String,
   info: String,
-  recepieImage: String,
+  recipeImage: String,
   userId: { type: String, ref: "User" },
 });
 
-module.exports = mongoose.model("Recepie", recepieSchema);
+module.exports = mongoose.model("Recipe", recipeSchema);

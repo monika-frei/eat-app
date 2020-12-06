@@ -1,19 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./RecepieCard.module.scss";
+import styles from "./RecipeCard.module.scss";
 import imageBg from "../../../assets/2499038.jpg";
 import { Link } from "react-router-dom";
 import ButtonIcon from "../../atoms/ButtonIcon/ButtonIcon";
 
-const RecepieCard = ({ item, handleQuickAdd }) => {
-  const imageUrlString = `http://localhost:4000/${item.recepieImage}`;
+const RecipeCard = ({ item, handleQuickAdd }) => {
+  const imageUrlString = `http://localhost:4000/${item.recipeImage}`;
   const imageUrl =
-    item.recepieImage !== ""
-      ? imageUrlString.replace(/\\/g, "/")
-      : `${imageBg}`;
+    item.recipeImage !== "" ? imageUrlString.replace(/\\/g, "/") : `${imageBg}`;
   return (
     <div className={styles.container}>
-      <Link to={`/recepies/${item._id}`}>
+      <Link to={`/recipes/${item._id}`}>
         <div className={styles.wrapper}>
           <h2 className={styles.heading}>{item.title}</h2>
           <div
@@ -34,9 +32,9 @@ const RecepieCard = ({ item, handleQuickAdd }) => {
   );
 };
 
-RecepieCard.propTypes = {
+RecipeCard.propTypes = {
   item: PropTypes.object,
   handleQuickAdd: PropTypes.func,
 };
 
-export default RecepieCard;
+export default RecipeCard;

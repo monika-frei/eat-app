@@ -7,19 +7,17 @@ import Button from "../../components/atoms/Button/Button";
 import ButtonIconSmall from "../../components/atoms/ButtonIconSmall/ButtonIconSmall";
 import UserPageTemplate from "../../templates/UserPageTemplate/UserPageTemplate";
 import QuickAdd from "../../components/molecules/QuickAdd/QuickAdd";
-import AddRecepie from "../../components/organisms/AddRecepie/AddRecepie";
+import AddRecipe from "../../components/organisms/AddRecipe/AddRecipe";
 import ToggleOpen from "../../providers/ToggleOpen";
 import cx from "classnames";
-import { connect } from "react-redux";
-import { deleteRecepie as deleteRecepieAction } from "../../redux/actions/index";
 import PopUpDelete from "../../components/molecules/PopUpDelete/PopUpDelete";
 import { routes } from "../../routes/index";
-import { Document, Page } from "react-pdf";
 import { jsPDF } from "jspdf";
 import * as html2canvas from "html2canvas";
-import { RecepiesContext } from "../../context/RecepiesContext";
-import { useLocation, useHistory } from "react-router";
+import { RecipesContext } from "../../context/RecipesContext";
+import { useLocation, useHistory, Redirect } from "react-router";
 import PlanContextProvider from "../../context/PlanContext";
+import { GlobalContext } from "../../context/GlobalContext";
 
 const DetailsPage = () => {
   const [isOpenAdd, setOpenAdd] = useState(false);
@@ -27,21 +25,20 @@ const DetailsPage = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const history = useHistory();
-  const { getSingleRecepie, recepie, deleteRecepie } = useContext(
-    RecepiesContext
-  );
+  const { userId, userLoggedIn } = useContext(GlobalContext);
+  const { getSingleRecipe, recipe, deleteRecipe } = useContext(RecipesContext);
 
   useEffect(() => {
-    getSingleRecepie(id);
+    getSingleRecipe(id);
   }, []);
 
   const handleCloseDelete = () => {
     setOpenDelete(!isOpenDelete);
   };
   const handleDelete = () => {
-    deleteRecepie(id);
+    deleteRecipe(id);
     setOpenDelete(!isOpenDelete);
-    history.push(`${routes.recepies}`);
+    history.push(`${routes.recipes}`);
   };
 
   const generatePdf = () => {
@@ -57,22 +54,16 @@ const DetailsPage = () => {
       pdf.save("download.pdf");
     });
   };
-
-  // const id = location.pathname.slice(10, location.pathname.length);
-  // const [recepie] = recepies && recepies.filter((item) => item.id === id);
-
-  // const title = recepie ? recepie.title : "";
-  // const preparationTime = recepie ? recepie.extra.time : "";
-  // const servings = recepie ? recepie.extra.servings : "";
-  // const meals = recepie ? recepie.category : [];
-  // const ingredients = recepie ? recepie.ingredients : [];
-  // const preparation = recepie ? recepie.preparation : [];
-  // const addInfo = recepie ? recepie.extra.info : "";
-  const imageUrlString = `http://localhost:4000/${recepie.recepieImage}`;
+  const imageUrlString = `http://localhost:4000/${recipe.recipeImage}`;
   const imageUrl =
-    recepie.recepieImage !== ""
+    recipe.recipeImage !== ""
       ? imageUrlString.replace(/\\/g, "/")
       : `${imageBg}`;
+
+  if (userLoggedIn === false) {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <ToggleOpen
       render={({ toggle, classOpen }) => (
@@ -81,27 +72,26 @@ const DetailsPage = () => {
             <div
               className={styles.header}
               style={{
-                backgroundImage: `url(${imageUrl}), url(${imageUrl})`,
+                backgroundImage: `url(${imageUrl})`,
               }}
             >
               <div className={styles.headerVisible}>
-                <Heading custom={styles.heading}>{recepie.title}</Heading>
+                <Heading custom={styles.heading}>{recipe.title}</Heading>
                 <Paragraph custom={styles.extraInfo}>
-                  {recepie.time !== "" && (
-                    <span>Preparation time: {recepie.time}</span>
+                  {recipe.time !== "" && (
+                    <span>Preparation time: {recipe.time}</span>
                   )}
-                  {recepie.servings !== "" && (
-                    <span>Servings: {recepie.servings}</span>
+                  {recipe.servings !== "" && (
+                    <span>Servings: {recipe.servings}</span>
                   )}
                   <ul>
-                    Good for:
-                    {recepie.category.map((item) => (
+                    <span>Good for: </span>
+                    {recipe.category.map((item) => (
                       <li>{item}</li>
                     ))}
                   </ul>
                 </Paragraph>
               </div>
-
               <div
                 style={{
                   width: "100%",
@@ -118,7 +108,7 @@ const DetailsPage = () => {
               <section className={styles.ingredients}>
                 <h2>Ingredients</h2>
                 <ul>
-                  {recepie.ingredients.map((item) => (
+                  {recipe.ingredients.map((item) => (
                     <li>
                       {item.title}
                       <span>
@@ -132,7 +122,7 @@ const DetailsPage = () => {
               <section className={styles.preparationWrapper}>
                 <h2>Preparation</h2>
                 <ul>
-                  {recepie.preparation.map((item) => (
+                  {recipe.preparation.map((item) => (
                     <li>
                       <em>Step {item.step}</em>
                       <p>{item.content}</p>
@@ -141,20 +131,23 @@ const DetailsPage = () => {
                 </ul>
               </section>
               <div className={styles.horLine}></div>
-              {recepie.info !== "" && (
+              {recipe.info !== "" && (
                 <section className={styles.addInfo}>
-                  <h3>Some additional info</h3>
-                  {recepie.info}
+                  <h2>Some additional info</h2>
+                  <p>{recipe.info}</p>
                 </section>
               )}
               <div className={styles.buttons}>
-                <Button
-                  bgColor="bgSecondary"
-                  custom={cx(styles.btn, styles.btnSecondary)}
-                  onClick={toggle}
-                >
-                  Edit
-                </Button>
+                {userId === recipe.userId && (
+                  <Button
+                    bgColor="bgSecondary"
+                    custom={cx(styles.btn, styles.btnSecondary)}
+                    onClick={toggle}
+                  >
+                    Edit
+                  </Button>
+                )}
+
                 <Button
                   bgColor="bgPrimary"
                   custom={cx(styles.btn, styles.btnPrimary)}
@@ -162,34 +155,35 @@ const DetailsPage = () => {
                 >
                   Add to plan
                 </Button>
-                <Button
-                  bgColor="bgGrey"
-                  custom={cx(styles.btn, styles.btnGrey)}
-                  onClick={() => setOpenDelete(!isOpenDelete)}
-                >
-                  Delete
-                </Button>
+                {userId === recipe.userId && (
+                  <Button
+                    bgColor="bgGrey"
+                    custom={cx(styles.btn, styles.btnGrey)}
+                    onClick={() => setOpenDelete(!isOpenDelete)}
+                  >
+                    Delete
+                  </Button>
+                )}
               </div>
               {isOpenAdd && (
                 <PlanContextProvider>
                   <QuickAdd
-                    item={recepie}
+                    item={recipe}
                     setOpen={setOpenAdd}
                     custom={styles.quickAdd}
                   />
                 </PlanContextProvider>
               )}
-              {classOpen === "activeForm" && (
-                <AddRecepie
-                  classOpen={classOpen}
-                  toggle={toggle}
-                  recepieToEdit={recepie}
-                />
-              )}
+              <AddRecipe
+                classOpen={classOpen}
+                toggle={toggle}
+                recepieToEdit={recipe}
+              />
               {isOpenDelete && (
                 <PopUpDelete
                   setOpen={handleCloseDelete}
                   deleteItem={handleDelete}
+                  custom={styles.delete}
                 />
               )}
             </section>

@@ -1,15 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
-import styles from "./PopupRecepies.module.scss";
+import styles from "./PopupRecipes.module.scss";
 import Search from "../../atoms/Search/Search";
-import { RecepiesContext } from "../../../context/RecepiesContext";
+import { RecipesContext } from "../../../context/RecipesContext";
 
-const PopupRecepies = ({ meal, handleSaveRecepie, handleClose }) => {
+const PopupRecipes = ({ meal, handleSaveRecipe, handleClose }) => {
   const [inputContent, setInputContent] = useState("");
-  const { getAllRecepies, recepies } = useContext(RecepiesContext);
+  const { getAllRecipes, recipes } = useContext(RecipesContext);
 
   useEffect(() => {
-    getAllRecepies();
+    getAllRecipes();
   }, []);
 
   const handleInputChange = (e) => {
@@ -29,14 +29,14 @@ const PopupRecepies = ({ meal, handleSaveRecepie, handleClose }) => {
         onChange={handleInputChange}
       />
       <ul className={styles.list}>
-        {recepies
+        {recipes
           .filter((item) => item.title.includes(inputContent.toLowerCase()))
           .map((item) => {
             return (
               <li className={styles.listItem} key={item._id}>
                 <button
                   data-title={item.title}
-                  onClick={() => handleSaveRecepie(item, meal)}
+                  onClick={() => handleSaveRecipe(item, meal)}
                   type="button"
                 >
                   {item.title}
@@ -49,4 +49,4 @@ const PopupRecepies = ({ meal, handleSaveRecepie, handleClose }) => {
   );
 };
 
-export default PopupRecepies;
+export default PopupRecipes;

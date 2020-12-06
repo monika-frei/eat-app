@@ -26,10 +26,17 @@
 @mixin mobile-recepies-card-grid {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
   grid-template-rows: auto;
   column-gap: 1rem;
   row-gap: 1rem;
+}
+
+@mixin mobile-page-heading {
+  margin-top: 1rem;
+  font-size: $fontSize-m;
+  text-align: center;
+  color: $darkfont;
 }
 
 //button mixins
@@ -46,9 +53,8 @@
 
 @mixin button-icon-position-mobile {
   position: absolute;
-  right: 50%;
-  transform: translateX(50%);
-  top: 10rem;
+  right: 3rem;
+  top: 9rem;
 }
 
 @mixin button-icon-position-tablet {

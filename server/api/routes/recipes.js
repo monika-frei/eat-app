@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const checkAuth = require("../middleware/check-auth");
-const RecepiesController = require("../controllers/recepies");
+const RecipeController = require("../controllers/recipes");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -30,28 +30,24 @@ const upload = multer({
   fileFilter,
 });
 
-router.get("/", checkAuth, RecepiesController.recepies_get_all_recepies);
+router.get("/", checkAuth, RecipeController.recipes_get_all_recipes);
 
 router.post(
   "/",
   checkAuth,
   upload.single("file"),
-  RecepiesController.recepies_create_recepie
+  RecipeController.recipes_create_recipe
 );
 
-router.get(
-  "/:recepieId",
-  checkAuth,
-  RecepiesController.recepies_get_single_recepie
-);
+router.get("/:recipeId", checkAuth, RecipeController.recipes_get_single_recipe);
 
 router.patch(
-  "/:recepieId",
+  "/:recipeId",
   checkAuth,
   upload.single("file"),
-  RecepiesController.recepies_change_recepie
+  RecipeController.recipes_change_recipe
 );
 
-router.delete("/:recepieId", RecepiesController.recepies_delete_recepie);
+router.delete("/:recipeId", RecipeController.recipes_delete_recipe);
 
 module.exports = router;

@@ -3,8 +3,7 @@ const DayPlan = require("../models/plan");
 
 exports.plan_get_all = (req, res, next) => {
   const loggedUserId = req.userData.userId;
-  // { userId: loggedUserId } wkleić w find
-  DayPlan.find()
+  DayPlan.find({ userId: loggedUserId })
     .select("-__v")
     .exec()
     .then((docs) => {

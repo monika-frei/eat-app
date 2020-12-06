@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router";
-import styles from "./AddRecepieForm.module.scss";
+import styles from "./AddRecipeForm.module.scss";
 import cx from "classnames";
 import FormAddTemplate from "../../../templates/FormAddTemplate/FormAddTemplate";
 import ButtonIconSmall from "../../atoms/ButtonIconSmall/ButtonIconSmall";
@@ -8,7 +8,7 @@ import Button from "../../atoms/Button/Button";
 import ListItem from "../../atoms/ListItem/ListItem";
 import { meals as mealsOptions } from "../../../constans";
 
-const AddRecepieForm = ({
+const AddRecipeForm = ({
   classOpen,
   toggle,
   title,
@@ -45,7 +45,7 @@ const AddRecepieForm = ({
 }) => {
   const location = useLocation();
   let buttonText;
-  if (location.pathname === "/recepies") {
+  if (location.pathname === "/recipes") {
     buttonText = "Add";
   } else {
     buttonText = "Save";
@@ -53,26 +53,28 @@ const AddRecepieForm = ({
   return (
     <FormAddTemplate classOpen={classOpen} toggle={toggle}>
       <form className={styles.form}>
-        <label htmlFor="title">Write a title:</label>
-        <input
-          type="text"
-          name="title"
-          id="title"
-          value={title}
-          className={styles.titleInput}
-          onChange={(e) => setTitle(e.target.value)}
-        ></input>
-        <label htmlFor="file">Add recepie image</label>
-        <input
-          type="file"
-          name="file"
-          id="file"
-          className={styles.titleInput}
-          onChange={(e) => handleFileUpload(e)}
-        ></input>
-        <p className={styles.paragraphLabel}>
-          Choose categorie of the recepie?
-        </p>
+        <div>
+          <label htmlFor="title">Write a title:</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            value={title}
+            className={styles.titleInput}
+            onChange={(e) => setTitle(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="file">Add recipe image</label>
+          <input
+            type="file"
+            name="file"
+            id="file"
+            className={styles.titleInput}
+            onChange={(e) => handleFileUpload(e)}
+          ></input>
+        </div>
+        <p className={styles.paragraphLabel}>Choose categorie of the recipe?</p>
         <div className={styles.wrapper}>
           {mealsOptions.map((meal) => {
             return (
@@ -121,7 +123,7 @@ const AddRecepieForm = ({
                 onChange={(e) => setIngredientAmount(e.target.value)}
               ></input>
             </div>
-            <label>
+            <label htmlFor="unit">
               Choose unit:
               <select
                 value={ingredientUnit}
@@ -132,6 +134,9 @@ const AddRecepieForm = ({
                 <option value="kg">kg</option>
                 <option value="ml">ml</option>
                 <option value="l">l</option>
+                <option value="tsp">tsp</option>
+                <option value="tbsp">tbsp</option>
+                <option value="pinch">pinch</option>
                 <option value="-">-</option>
               </select>
             </label>
@@ -159,8 +164,8 @@ const AddRecepieForm = ({
         </div>
         <div className={styles.preparationWrapper}>
           <p className={styles.paragraphLabel}>Preparation</p>
-          <label htmlFor="content">
-            Step
+          <div>
+            <label htmlFor="content">Step</label>
             <input
               name="step"
               type="number"
@@ -170,7 +175,7 @@ const AddRecepieForm = ({
               className={styles.inputStep}
               onChange={(e) => handleStepChange(e)}
             ></input>
-          </label>
+          </div>
           <textarea
             id="content"
             name="content"
@@ -192,7 +197,7 @@ const AddRecepieForm = ({
                   return (
                     <li key={item.step}>
                       <p className={styles.paragraphLabel}>
-                        Step {item.step}
+                        <span>Step {item.step}</span>
                         <ButtonIconSmall
                           bgImage="buttonEdit"
                           btnSize="btn20"
@@ -259,4 +264,4 @@ const AddRecepieForm = ({
   );
 };
 
-export default AddRecepieForm;
+export default AddRecipeForm;

@@ -1,47 +1,43 @@
 import React, { useState, useEffect, useContext } from "react";
-import styles from "./GroceryListPage.module.scss";
+import { Redirect } from "react-router";
 import UserPageTemplate from "../../templates/UserPageTemplate/UserPageTemplate";
-import Button from "../../components/atoms/Button/Button";
-import GroceryList from "../../components/organisms/GroceryList/GroceryList";
-import PopUpListItem from "../../components/molecules/PopUpListItem/PopUpListItem";
-import cx from "classnames";
 import { GlobalContext } from "../../context/GlobalContext";
-import { RecepiesContext } from "../../context/RecepiesContext";
+import { RecipesContext } from "../../context/RecipesContext";
 import GroceryListTemplate from "../../templates/GroceryListTemplate/GroceryListTemplate";
 
 const GroceryListPage = ({ addItemToGroceryList, groceryList }) => {
   const [activePopUp, setActivePopUp] = useState(false);
-  const [fetchedRecepies, setFetchedRecepies] = useState([]);
+  const [fetchedRecipes, setFetchedRecipes] = useState([]);
   const [activeGroceryList, setActiveGroceryList] = useState(false);
   const [selectedDays, setSelectedDays] = useState(["all"]);
   const [classActiveBtn, setClassActiveBtn] = useState(true);
-  const [recepiesToList, setRecepiesToList] = useState([]);
+  const [recipesToList, setRecipesToList] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [filteredIngredients, setFilteredIngredients] = useState([]);
-  const { plan, plannedRecepies } = useContext(GlobalContext);
-  const { getSingleRecepie, recepie } = useContext(RecepiesContext);
+  const { plan, plannedRecipes, userLoggedIn } = useContext(GlobalContext);
+  const { getSingleRecipe, recipe } = useContext(RecipesContext);
 
   useEffect(() => {
-    plannedRecepies.map((item) => {
-      getSingleRecepie(item.recepieId);
+    plannedRecipes.map((item) => {
+      getSingleRecipe(item.recepieId);
     });
-  }, [plannedRecepies]);
+  }, [plannedRecipes]);
 
   useEffect(() => {
-    setFetchedRecepies([...fetchedRecepies, recepie]);
-  }, [recepie]);
+    setFetchedRecipes([...fetchedRecipes, recipe]);
+  }, [recipe]);
 
   useEffect(() => {
-    getPlanRecepies();
+    getPlanRecipes();
   }, []);
 
   useEffect(() => {
-    getPlanRecepies();
-  }, [selectedDays, fetchedRecepies]);
+    getPlanRecipes();
+  }, [selectedDays, fetchedRecipes]);
 
   useEffect(() => {
     getAllIngredients();
-  }, [recepiesToList]);
+  }, [recipesToList]);
 
   useEffect(() => {
     getFilteredIngredientsArray();
@@ -57,9 +53,9 @@ const GroceryListPage = ({ addItemToGroceryList, groceryList }) => {
     setActivePopUp(false);
   };
 
-  const getPlanRecepies = () => {
+  const getPlanRecipes = () => {
     let daysArray;
-    let allRecepies = [];
+    let allRecipes = [];
     if (selectedDays.includes("all")) {
       daysArray = plan.map((item) => item.date);
     } else {
@@ -67,23 +63,23 @@ const GroceryListPage = ({ addItemToGroceryList, groceryList }) => {
     }
     plan.map((item) => {
       if (daysArray.includes(item.date)) {
-        allRecepies = [...allRecepies, ...item.recepies];
+        allRecipes = [...allRecipes, ...item.recipe];
       }
     });
-    let plannedRecepies = [];
-    allRecepies.map((recepie, index, array) => {
-      const count = array.filter((item) => item === recepie).length;
+    let plannedRecipes = [];
+    allRecipes.map((recipe, index, array) => {
+      const count = array.filter((item) => item === recipe).length;
       const newItem = {
         count,
-        recepieId: recepie,
+        recipeId: recipe,
       };
       if (
-        plannedRecepies.find((item) => item.recepieId === recepie) === undefined
+        plannedRecipes.find((item) => item.recipeId === recipe) === undefined
       ) {
-        plannedRecepies = [...plannedRecepies, newItem];
+        plannedRecipes = [...plannedRecipes, newItem];
       }
     });
-    setRecepiesToList(plannedRecepies);
+    setRecipesToList(plannedRecipes);
   };
 
   const handleSelectOption = (date) => {
@@ -134,14 +130,14 @@ const GroceryListPage = ({ addItemToGroceryList, groceryList }) => {
 
   const getAllIngredients = () => {
     let allIngredients = [];
-    fetchedRecepies.map((item) => {
-      const [count] = recepiesToList.filter((plannedRecepie) => {
-        if (plannedRecepie.recepieId === item._id) {
-          return plannedRecepie.count;
+    fetchedRecipes.map((item) => {
+      const [count] = recipesToList.filter((plannedRecipe) => {
+        if (plannedRecipe.recipeId === item._id) {
+          return plannedRecipe.count;
         }
       });
       if (count) {
-        const recepieIngredients = item.ingredients.map((ingredient) => {
+        const recipeIngredients = item.ingredients.map((ingredient) => {
           const amount = parseInt(ingredient.amount, 10);
           return {
             title: ingredient.title,
@@ -149,11 +145,15 @@ const GroceryListPage = ({ addItemToGroceryList, groceryList }) => {
             unit: ingredient.unit,
           };
         });
-        allIngredients = [...allIngredients, ...recepieIngredients];
+        allIngredients = [...allIngredients, ...recipeIngredients];
       }
     });
     setIngredients(allIngredients);
   };
+
+  if (userLoggedIn === false) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <UserPageTemplate border="borderTertiary" bgColorLight="bgTertiaryLight">
@@ -163,7 +163,7 @@ const GroceryListPage = ({ addItemToGroceryList, groceryList }) => {
         setActivePopUp={setActivePopUp}
         selectedDays={selectedDays}
         classActiveBtn={classActiveBtn}
-        fetchedRecepies={fetchedRecepies}
+        fetchedRecipes={fetchedRecipes}
         activePopUp={activePopUp}
         groceryList={filteredIngredients}
       />

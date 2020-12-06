@@ -8,10 +8,7 @@
 }
 
 .heading {
-  margin-top: 1rem;
-  font-size: $fontSize-m;
-  text-align: center;
-  color: $darkfont;
+  @include mobile-page-heading;
 }
 
 .buttons {
@@ -42,20 +39,13 @@
 }
 
 .buttonWrapper {
-  position: absolute;
-  right: 3rem;
-  top: 9rem;
+  @include button-icon-position-mobile;
 }
 
 .buttonAdd {
-  position: relative;
-
+  @include button-hover-move-down;
   &:hover {
     background-color: darken($primary-color, 5%);
-    top: 3px;
-  }
-  &:active {
-    top: 6px;
   }
 }
 
@@ -81,7 +71,7 @@
 }
 
 .quickAdd {
-  top: 50px;
+  top: 50vh;
 }
 
 @media (min-width: $breakpoint-tablet) {

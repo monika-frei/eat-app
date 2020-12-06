@@ -5,7 +5,7 @@ import moment from "moment";
 const AddPlan = (props) => {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState("");
-  const [savedRecepies, setSavedRecepies] = useState({
+  const [savedRecipes, setSavedRecipes] = useState({
     breakfast: [],
     lunch: [],
     dinner: [],
@@ -17,7 +17,7 @@ const AddPlan = (props) => {
   useEffect(() => {
     if (classOpen === "") {
       setDate("");
-      setSavedRecepies({
+      setSavedRecipes({
         breakfast: [],
         lunch: [],
         dinner: [],
@@ -28,37 +28,37 @@ const AddPlan = (props) => {
 
   useEffect(() => {
     setDate(planToEdit.date);
-    setSavedRecepies(planToEdit.plan);
+    setSavedRecipes(planToEdit.plan);
   }, [planToEdit]);
 
-  const handleAddRecepie = (e, meal) => {
+  const handleAddRecipe = (e, meal) => {
     setMeal(meal);
     setOpen(true);
     e.preventDefault();
   };
 
-  //function which saves chosen recepie from the list
-  const handleSaveRecepie = (recepie, meal) => {
+  //function which saves chosen recipe from the list
+  const handleSaveRecipe = (recipe, meal) => {
     if (
-      savedRecepies[meal].find((item) => item._id === recepie._id) === undefined
+      savedRecipes[meal].find((item) => item._id === recipe._id) === undefined
     ) {
-      const newArray = [...savedRecepies[meal], recepie];
-      setSavedRecepies({ ...savedRecepies, ...{ [meal]: newArray } });
+      const newArray = [...savedRecipes[meal], recipe];
+      setSavedRecipes({ ...savedRecipes, ...{ [meal]: newArray } });
     }
   };
 
-  const handleDeleteRecepie = (meal, recepie) => {
-    const filteredRecepies = savedRecepies[meal].filter(
-      (item) => item._id !== recepie._id
+  const handleDeleteRecipe = (meal, recipe) => {
+    const filteredRecipes = savedRecipes[meal].filter(
+      (item) => item._id !== recipe._id
     );
-    setSavedRecepies({ ...savedRecepies, ...{ [meal]: filteredRecepies } });
+    setSavedRecipes({ ...savedRecipes, ...{ [meal]: filteredRecipes } });
   };
 
   //send plan to db
   const handleSubmit = (e) => {
     e.preventDefault();
     setDate("");
-    setSavedRecepies({
+    setSavedRecipes({
       breakfast: [],
       lunch: [],
       dinner: [],
@@ -66,7 +66,7 @@ const AddPlan = (props) => {
     });
     const day = moment(date).format("dddd");
     const formatDate = moment(date).format("YYYY-MM-DD");
-    sendPlan(formatDate, day, savedRecepies);
+    sendPlan(formatDate, day, savedRecipes);
     toggle();
     setRefresh((state) => !state);
   };
@@ -78,10 +78,10 @@ const AddPlan = (props) => {
       open={open}
       setOpen={setOpen}
       meal={meal}
-      savedRecepies={savedRecepies}
-      handleAddRecepie={handleAddRecepie}
-      handleDeleteRecepie={handleDeleteRecepie}
-      handleSaveRecepie={handleSaveRecepie}
+      savedRecipes={savedRecipes}
+      handleAddRecipe={handleAddRecipe}
+      handleDeleteRecipe={handleDeleteRecipe}
+      handleSaveRecipe={handleSaveRecipe}
       handleSubmit={handleSubmit}
       {...props}
     />

@@ -3,12 +3,12 @@ import styles from "./AddPlanForm.module.scss";
 import FormAddTemplate from "../../../templates/FormAddTemplate/FormAddTemplate";
 import Card from "../../molecules/Card/Card";
 import Button from "../../atoms/Button/Button";
-import PopupRecepies from "../../molecules/PopupRecepies/PopupRecepies";
+import PopupRecipes from "../../molecules/PopupRecipes/PopupRecipes";
 import { meals } from "../../../constans/index";
 import moment from "moment";
 import DatePicker from "react-date-picker";
 import { useLocation } from "react-router";
-import RecepiesContextProvider from "../../../context/RecepiesContext";
+import RecipesContextProvider from "../../../context/RecipesContext";
 
 const AddPlanForm = ({
   date,
@@ -16,12 +16,12 @@ const AddPlanForm = ({
   open,
   setOpen,
   meal,
-  handleSaveRecepie,
-  handleAddRecepie,
-  handleDeleteRecepie,
+  handleSaveRecipe,
+  handleAddRecipe,
+  handleDeleteRecipe,
   toggle,
   classOpen,
-  savedRecepies,
+  savedRecipes,
   handleSubmit,
 }) => {
   const location = useLocation();
@@ -55,16 +55,16 @@ const AddPlanForm = ({
           {date !== "" && (
             <>
               <h3 className={styles.heading}>
-                Plan your week by adding recepies from the list
+                Plan your week by adding recipes from the list
               </h3>
               <div className={styles.meals}>
                 {meals.map((meal) => (
                   <Card
                     key={meal}
                     meal={meal}
-                    handleAddRecepie={handleAddRecepie}
-                    handleDelete={handleDeleteRecepie}
-                    savedRecepies={savedRecepies[meal]}
+                    handleAddRecepie={handleAddRecipe}
+                    handleDelete={handleDeleteRecipe}
+                    savedRecipes={savedRecipes[meal]}
                   />
                 ))}
               </div>
@@ -72,13 +72,13 @@ const AddPlanForm = ({
           )}
 
           {open && (
-            <RecepiesContextProvider>
-              <PopupRecepies
+            <RecipesContextProvider>
+              <PopupRecipes
                 meal={meal}
-                handleSaveRecepie={handleSaveRecepie}
+                handleSaveRecipe={handleSaveRecipe}
                 handleClose={() => setOpen(!open)}
               />
-            </RecepiesContextProvider>
+            </RecipesContextProvider>
           )}
           <Button
             type="submit"
