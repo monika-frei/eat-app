@@ -1,10 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
-import { RecepiesContext } from "../../../context/RecepiesContext";
-import AddRecepieForm from "../AddRecepieForm/AddRecepieForm";
-import Axios from "axios";
+import { RecipesContext } from "../../../context/RecipesContext";
+import AddRecipeForm from "../AddRecipeForm/AddRecipeForm";
 
-const AddRecepie = ({ classOpen, toggle, recepieToEdit }) => {
-  const { sendRecepie } = useContext(RecepiesContext);
+const AddRecipe = (props) => {
+  const { sendRecipe } = useContext(RecipesContext);
   const [step, setStep] = useState(1);
   const [editStep, setEditStep] = useState(null);
   const [content, setContent] = useState("");
@@ -20,18 +19,19 @@ const AddRecepie = ({ classOpen, toggle, recepieToEdit }) => {
   const [ingredients, setIngredients] = useState([]);
   const [preparation, setPreparation] = useState([]);
   const [file, setFile] = useState("");
+  const { classOpen, toggle, recipeToEdit } = props;
 
   useEffect(() => {
-    if (recepieToEdit) {
-      setTitle(recepieToEdit.title);
-      setTime(recepieToEdit.time);
-      setServings(recepieToEdit.servings);
-      setAddInfo(recepieToEdit.info);
-      setMeals(recepieToEdit.category);
-      setIngredients(recepieToEdit.ingredients);
-      setPreparation(recepieToEdit.preparation);
+    if (recipeToEdit) {
+      setTitle(recipeToEdit.title);
+      setTime(recipeToEdit.time);
+      setServings(recipeToEdit.servings);
+      setAddInfo(recipeToEdit.info);
+      setMeals(recipeToEdit.category);
+      setIngredients(recipeToEdit.ingredients);
+      setPreparation(recipeToEdit.preparation);
     }
-  }, [recepieToEdit]);
+  }, [recipeToEdit]);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -116,7 +116,7 @@ const AddRecepie = ({ classOpen, toggle, recepieToEdit }) => {
     e.preventDefault();
     const obj = {
       category: meals,
-      title,
+      title: title.toLowerCase(),
       ingredients,
       preparation,
       time,
@@ -130,12 +130,12 @@ const AddRecepie = ({ classOpen, toggle, recepieToEdit }) => {
     if (file !== "") {
       formData.append("file", file);
     }
-    sendRecepie(formData);
+    sendRecipe(formData);
     toggle();
   };
 
   return (
-    <AddRecepieForm
+    <AddRecipeForm
       classOpen={classOpen}
       toggle={toggle}
       title={title}
@@ -169,8 +169,9 @@ const AddRecepie = ({ classOpen, toggle, recepieToEdit }) => {
       handleEditPrepStep={handleEditPrepStep}
       handleDeletePrepStep={handleDeletePrepStep}
       handleSubmit={handleSubmit}
+      {...props}
     />
   );
 };
 
-export default AddRecepie;
+export default AddRecipe;

@@ -1,25 +1,26 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import styles from "./RecepiesPage.module.scss";
+import React, { useState, useContext } from "react";
+import styles from "./RecipesPage.module.scss";
 import cx from "classnames";
 import UserPageTemplate from "../../templates/UserPageTemplate/UserPageTemplate";
 import Heading from "../../components/atoms/Heading/Heading";
 import Button from "../../components/atoms/Button/Button";
-import RecepiesGrid from "../../components/organisms/RecepiesGrid/RecepiesGrid";
+import RecipesGrid from "../../components/organisms/RecipesGrid/RecipesGrid";
 import ButtonIcon from "../../components/atoms/ButtonIcon/ButtonIcon";
 import Search from "../../components/atoms/Search/Search";
 import ToggleOpen from "../../providers/ToggleOpen";
 import QuickAdd from "../../components/molecules/QuickAdd/QuickAdd";
-import AddRecepie from "../../components/organisms/AddRecepie/AddRecepie";
+import AddRecipe from "../../components/organisms/AddRecipe/AddRecipe";
 import PlanContextProvider from "../../context/PlanContext";
+import { GlobalContext } from "../../context/GlobalContext";
+import { Redirect } from "react-router";
 
-const RecepiesPage = () => {
+const RecipesPage = () => {
   const [selectedMeal, setSelectedMeal] = useState("all");
   const [classActiveBtn, setClassActiveBtn] = useState(true);
   const [inputContent, setInputContent] = useState("");
   const [isOpen, setOpen] = useState(false);
-  const [activeRecepie, setActiveRecepie] = useState({});
-
+  const [activeRecipe, setActiveRecipe] = useState({});
+  const { userLoggedIn } = useContext(GlobalContext);
   const meals = ["all", "breakfast", "lunch", "dinner", "snacks"];
 
   const handleInputChange = (e) => {
@@ -34,14 +35,18 @@ const RecepiesPage = () => {
   };
   const handleQuickAdd = (item) => {
     setOpen(!isOpen);
-    setActiveRecepie(item);
+    setActiveRecipe(item);
   };
+
+  if (userLoggedIn === false) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <ToggleOpen
       render={({ toggle, classOpen }) => (
         <UserPageTemplate bgColorLight="bgPrimaryLight" border="borderPrimary">
-          <Heading custom={styles.heading}>Recepies</Heading>
+          <Heading custom={styles.heading}>Recipes</Heading>
           <div className={styles.wrapper}>
             <div className={styles.buttons}>
               {meals.map((meal) => {
@@ -58,12 +63,12 @@ const RecepiesPage = () => {
             </div>
             <Search
               custom={styles.search}
-              value={inputContent}
+              value={inputContent.toLowerCase()}
               onChange={handleInputChange}
             />
-            <RecepiesGrid
+            <RecipesGrid
               meal={selectedMeal}
-              inputContent={inputContent}
+              inputContent={inputContent.toLowerCase()}
               handleQuickAdd={handleQuickAdd}
             />
             <div className={styles.buttonWrapper}>
@@ -77,19 +82,17 @@ const RecepiesPage = () => {
           {isOpen && (
             <PlanContextProvider>
               <QuickAdd
-                item={activeRecepie}
+                item={activeRecipe}
                 setOpen={setOpen}
                 custom={styles.quickAdd}
               />
             </PlanContextProvider>
           )}
-          {classOpen === "activeForm" && (
-            <AddRecepie classOpen={classOpen} toggle={toggle} />
-          )}
+          <AddRecipe classOpen={classOpen} toggle={toggle} />
         </UserPageTemplate>
       )}
     />
   );
 };
 
-export default RecepiesPage;
+export default RecipesPage;

@@ -53,9 +53,16 @@ exports.user_create_user = (req, res, next) => {
 };
 
 exports.user_logout_user = (req, res, next) => {
-  req.logout();
-  res.sendStatus(200);
-  res.redirect("/");
+  if (req.session) {
+    // delete session object
+    req.session.destroy(function (err) {
+      if (err) {
+        return next(err);
+      } else {
+        return res.redirect("/");
+      }
+    });
+  }
 };
 
 exports.user_login_user = (req, res, next) => {

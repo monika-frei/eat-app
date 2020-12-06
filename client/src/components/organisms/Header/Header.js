@@ -11,7 +11,7 @@ const transition = { duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] };
 const Header = ({ pageType }) => {
   const { width } = useViewport();
   const breakpoint = 1260;
-  const menuItemsLogged = ["Plan", "Recepies", "Grocery List", "Log Out"];
+  const menuItemsLogged = ["Plan", "Recipes", "Grocery List", "Log Out"];
   const menuItems = ["Log in", "Sign up"];
   const { userLoggedIn } = useContext(GlobalContext);
 

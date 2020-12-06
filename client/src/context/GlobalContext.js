@@ -8,28 +8,28 @@ const GlobalContextProvider = (props) => {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [userId, setUserId] = useState("");
   const [plan, setPlan] = useState([]);
-  const [plannedRecepies, setPlannedRecepies] = useState([]);
+  const [plannedRecipes, setPlannedRecipes] = useState([]);
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    let allRecepies = [];
+    let allRecipes = [];
     plan.map((item) => {
-      allRecepies = [...allRecepies, ...item.recepies];
+      allRecipes = [...allRecipes, ...item.recipes];
     });
-    let plannedRecepies = [];
-    allRecepies.map((recepie, index, array) => {
-      const count = array.filter((item) => item === recepie).length;
+    let plannedRecipes = [];
+    allRecipes.map((recipe, index, array) => {
+      const count = array.filter((item) => item === recipe).length;
       const newItem = {
         count,
-        recepieId: recepie,
+        recipeId: recipe,
       };
       if (
-        plannedRecepies.find((item) => item.recepieId === recepie) === undefined
+        plannedRecipes.find((item) => item.recipeId === recipe) === undefined
       ) {
-        plannedRecepies = [...plannedRecepies, newItem];
+        plannedRecipes = [...plannedRecipes, newItem];
       }
     });
-    setPlannedRecepies(plannedRecepies);
+    setPlannedRecipes(plannedRecipes);
   }, [plan]);
 
   const handleSignUp = (e, email, password) => {
@@ -121,7 +121,7 @@ const GlobalContextProvider = (props) => {
         getPlan,
         plan,
         setPlan,
-        plannedRecepies,
+        plannedRecipes,
       }}
     >
       {props.children}

@@ -15,9 +15,29 @@
   background-size: cover;
   border-radius: 1rem 1rem 0 0;
   background-blend-mode: saturation;
+
   .headerVisible {
-    background-color: rgba($color: #fff, $alpha: 0.6);
+    background-color: rgba($color: #fff, $alpha: 0.7);
     padding: 1rem 0;
+    border-radius: 1rem 1rem 0 0;
+    .heading {
+      padding: 0 2rem;
+      text-align: center;
+      font-size: $fontSize-l;
+    }
+    .extraInfo {
+      font-weight: $semi-bold;
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 1rem 0;
+      font-size: $fontSize-xs;
+      & > ul > li {
+        display: inline-block;
+        padding-right: 0.5rem;
+      }
+    }
   }
 }
 h2 {
@@ -29,11 +49,6 @@ h2 {
   border-bottom: 1px solid $grey300;
 }
 
-.heading {
-  align-self: center;
-  font-size: $fontSize-l;
-}
-
 .ingredients {
   margin: 30px 0;
   ul > li {
@@ -42,16 +57,6 @@ h2 {
       margin-left: 1rem;
     }
   }
-}
-
-.extraInfo {
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1rem 0;
-  font-size: $fontSize-xs;
-  font-weight: $light;
 }
 
 .preparationWrapper {
@@ -69,6 +74,7 @@ h2 {
 .addInfo {
   padding: 20px 0;
   text-align: justify;
+  font-size: $fontSize-xs;
   h3 {
     margin: 10px 0;
   }
@@ -124,6 +130,9 @@ h2 {
     }
   }
 }
+.delete {
+  bottom: 20rem;
+}
 
 .btnPrint {
   position: absolute;
@@ -132,9 +141,15 @@ h2 {
   width: 2rem;
   height: 2rem;
 }
-
-.quickAdd {
-  top: 40%;
+@media (min-width: $breakpoint-tablet) {
+  .buttons {
+    justify-content: center;
+  }
+  .delete {
+    left: 50%;
+    bottom: 10rem;
+    transform: translate(-50%, -50%);
+  }
 }
 
 @media (min-width: $breakpoint-desktop) {
@@ -171,12 +186,19 @@ h2 {
       transform: translateX(50%);
     }
   }
+  .header .headerVisible {
+    .heading {
+      font-size: $fontSize-xl;
+    }
+    .extraInfo {
+      font-weight: 400;
+      font-size: $fontSize-s;
+    }
+  }
   .recepie {
     padding: 0 5rem;
   }
-  .heading {
-    font-size: $fontSize-xl;
-  }
+
   h2 {
     font-size: $fontSize-l;
   }
@@ -199,6 +221,11 @@ h2 {
   }
   .preparationWrapper {
     ul > li {
+      font-size: $fontSize-s;
+    }
+  }
+  .addInfo {
+    & > p {
       font-size: $fontSize-s;
     }
   }

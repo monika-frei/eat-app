@@ -6,28 +6,27 @@ import cx from "classnames";
 import moment from "moment";
 import DatePicker from "react-date-picker";
 import { PlanContext } from "../../../context/PlanContext";
-import { GlobalContext } from "../../../context/GlobalContext";
 
 const QuickAdd = ({ item, setOpen, custom }) => {
-  const { addRecepieToPlan } = useContext(PlanContext);
+  const { addRecipeToPlan } = useContext(PlanContext);
   const [date, setDate] = useState("");
   const [meal, setMeal] = useState("");
   const wrapperClass = cx(styles.wrapper, custom);
 
-  const handleAddRecepie = (date, meal, item) => {
+  const handleAddRecipe = (date, meal, item) => {
     const newPlanItem = {
       _id: item._id,
       title: item.title,
     };
-    addRecepieToPlan(date, meal, newPlanItem);
+    addRecipeToPlan(date, meal, newPlanItem);
     setOpen(false);
   };
   return (
-    <div className={wrapperClass}>
-      <h2 className={styles.heading}>Add recepie to your plan</h2>
+    <section className={wrapperClass}>
+      <h2 className={styles.heading}>Add recipe to your plan</h2>
       <div>
         <p className={styles.paragraph}>
-          Selected recepie: <b>{item.title}</b>
+          Selected recipe: <b>{item.title}</b>
         </p>
         <div>
           <DatePicker
@@ -65,10 +64,10 @@ const QuickAdd = ({ item, setOpen, custom }) => {
         <ButtonIconSmall
           bgImage="buttonAdd"
           btnSize="btn30"
-          onClick={() => handleAddRecepie(date, meal, item)}
+          onClick={() => handleAddRecipe(date, meal, item)}
         />
       </div>
-    </div>
+    </section>
   );
 };
 

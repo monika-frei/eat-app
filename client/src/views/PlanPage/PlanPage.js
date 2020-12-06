@@ -7,22 +7,27 @@ import ToggleOpen from "../../providers/ToggleOpen";
 import { PlanContext } from "../../context/PlanContext";
 import { GlobalContext } from "../../context/GlobalContext";
 import AddPlan from "../../components/organisms/AddPlan/AddPlan";
+import { Redirect } from "react-router";
 
 const PlanPage = () => {
   const [refresh, setRefresh] = useState(false);
   const { sendPlan, planToEdit } = useContext(PlanContext);
-  const { getPlan } = useContext(GlobalContext);
-
+  const { getPlan,  userLoggedIn } = useContext(GlobalContext);
+  
   useEffect(() => {
     getPlan();
   }, [refresh]);
+
+  if (userLoggedIn === false) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <ToggleOpen
       render={({ toggle, classOpen }) => (
         <UserPageTemplate border="borderSecondary">
           <div className={styles.wrapper}>
-            <WeekPlan />
+            <WeekPlan toggle={toggle} />
             <div className={styles.buttonWrapper}>
               <ButtonIcon
                 bgColor="bgSecondary"

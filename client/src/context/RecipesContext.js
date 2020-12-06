@@ -1,13 +1,13 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useState, useContext } from "react";
 import { useLocation } from "react-router";
 import axios from "axios";
 import { GlobalContext } from "./GlobalContext";
 
-export const RecepiesContext = createContext();
+export const RecipesContext = createContext();
 
-const RecepiesContextProvider = (props) => {
-  const [recepies, setRecepies] = useState([]);
-  const [recepie, setRecepie] = useState({
+const RecipesContextProvider = (props) => {
+  const [recipes, setRecipes] = useState([]);
+  const [recipe, setRecipe] = useState({
     title: "",
     category: [],
     ingredients: [],
@@ -15,7 +15,7 @@ const RecepiesContextProvider = (props) => {
     time: "",
     servings: "",
     info: "",
-    recepieImage: "",
+    recipeImage: "",
   });
 
   const location = useLocation();
@@ -34,21 +34,21 @@ const RecepiesContextProvider = (props) => {
     },
   };
 
-  const getAllRecepies = () => {
+  const getAllRecipes = () => {
     axios
-      .get("http://localhost:4000/recepies", config)
+      .get("http://localhost:4000/recipes", config)
       .then((res) => {
-        setRecepies(res.data.recepies);
+        setRecipes(res.data.recipes);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const getSingleRecepie = async (id) => {
-    const res = await axios.get(`http://localhost:4000/recepies/${id}`, config);
+  const getSingleRecipe = async (id) => {
+    const res = await axios.get(`http://localhost:4000/recipes/${id}`, config);
     const data = await res.data;
-    setRecepie(data);
+    setRecipe(data);
     // axios
     //   .get(`http://localhost:4000/recepies/${id}`, config)
     //   .then((res) => {
@@ -61,9 +61,9 @@ const RecepiesContextProvider = (props) => {
     //   });
   };
 
-  const createRecepie = (formData) => {
+  const createRecipe = (formData) => {
     axios
-      .post("http://localhost:4000/recepies", formData, configPost)
+      .post("http://localhost:4000/recipes", formData, configPost)
       .then((res) => {
         console.log(res);
       })
@@ -72,9 +72,9 @@ const RecepiesContextProvider = (props) => {
       });
   };
 
-  const updateRecepie = (formData) => {
+  const updateRecipe = (formData) => {
     axios
-      .patch(`http://localhost:4000/recepies/${id}`, formData, config)
+      .patch(`http://localhost:4000/recipes/${id}`, formData, config)
       .then((res) => {
         console.log(res);
       })
@@ -83,20 +83,20 @@ const RecepiesContextProvider = (props) => {
       });
   };
 
-  const sendRecepie = (formData) => {
+  const sendRecipe = (formData) => {
     if (id) {
-      updateRecepie(formData);
+      updateRecipe(formData);
       console.log(id);
     } else {
       console.log(id);
-      createRecepie(formData);
+      createRecipe(formData);
     }
   };
 
-  const deleteRecepie = () => {
+  const deleteRecipe = () => {
     if (id !== "") {
       axios
-        .delete(`http://localhost:4000/recepies/${id}`, config)
+        .delete(`http://localhost:4000/recipes/${id}`, config)
         .then((res) => {
           console.log(res);
         })
@@ -107,20 +107,20 @@ const RecepiesContextProvider = (props) => {
   };
 
   return (
-    <RecepiesContext.Provider
+    <RecipesContext.Provider
       value={{
-        getAllRecepies,
-        getSingleRecepie,
-        recepies,
-        recepie,
-        createRecepie,
-        sendRecepie,
-        deleteRecepie,
+        getAllRecipes,
+        getSingleRecipe,
+        recipes,
+        recipe,
+        createRecipe,
+        sendRecipe,
+        deleteRecipe,
       }}
     >
       {props.children}
-    </RecepiesContext.Provider>
+    </RecipesContext.Provider>
   );
 };
 
-export default RecepiesContextProvider;
+export default RecipesContextProvider;

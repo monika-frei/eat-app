@@ -5,16 +5,13 @@ import { NavLink } from "react-router-dom";
 import Logo from "../../atoms/Logo/Logo";
 import { motion } from "framer-motion";
 import SidebarButton from "../../atoms/SidebarButton/SidebarButton";
-import axios from "axios";
 
 const transition = { duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] };
 
 const Sidebar = ({ pageType }) => {
   const handleLogOut = () => {
-    axios
-      .get("http://localhost:4000/user/logout")
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    window.location.reload();
+    return false;
   };
 
   return (
@@ -37,12 +34,12 @@ const Sidebar = ({ pageType }) => {
             </NavLink>
           </li>
           <li className={styles.link}>
-            <NavLink to="/recepies">
+            <NavLink to="/recipes">
               <SidebarButton
                 border="borderPrimary"
-                bgColor={pageType === "recepies" && "bgPrimary"}
+                bgColor={pageType === "recipes" && "bgPrimary"}
               >
-                Recepies
+                Recipes
               </SidebarButton>
             </NavLink>
           </li>
@@ -52,16 +49,14 @@ const Sidebar = ({ pageType }) => {
                 border="borderTertiary"
                 bgColor={pageType === "grocerylist" && "bgTertiary"}
               >
-                Shopping List
+                Grocery List
               </SidebarButton>
             </NavLink>
           </li>
           <li className={styles.link}>
-            <NavLink to="/grocerylist">
-              <SidebarButton border="borderGrey" onClick={handleLogOut}>
-                Log out
-              </SidebarButton>
-            </NavLink>
+            <SidebarButton border="borderGrey" onClick={handleLogOut}>
+              Log out
+            </SidebarButton>
           </li>
         </ul>
       </nav>

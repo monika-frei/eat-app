@@ -2,25 +2,25 @@ import React from "react";
 import styles from "./Card.module.scss";
 import ButtonIconSmall from "../../atoms/ButtonIconSmall/ButtonIconSmall";
 
-const Card = ({ meal, savedRecepies, handleAddRecepie, handleDelete }) => {
+const Card = ({ meal, savedRecipes, handleAddRecipe, handleDelete }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.heading}>
         <h3>{meal}</h3>
-        {handleAddRecepie && (
+        {handleAddRecipe && (
           <ButtonIconSmall
             bgImage="buttonAdd"
             btnSize="btn30"
-            onClick={(e) => handleAddRecepie(e, meal)}
+            onClick={(e) => handleAddRecipe(e, meal)}
             type="button"
           ></ButtonIconSmall>
         )}
       </div>
-      {savedRecepies && savedRecepies.length > 0 && (
+      {savedRecipes && savedRecipes.length > 0 && (
         <ul className={styles.list}>
-          {savedRecepies.map((recepie, index) => (
+          {savedRecipes.map((recipe, index) => (
             <li
-              key={`${recepie.title}-${recepie.id}-${meal}-${index}`}
+              key={`${recipe.title}-${recipe.id}-${meal}-${index}`}
               className={styles.listItem}
             >
               {handleDelete && (
@@ -28,10 +28,10 @@ const Card = ({ meal, savedRecepies, handleAddRecepie, handleDelete }) => {
                   bgImage="buttonDelete"
                   btnSize="btn20"
                   custom={styles.buttonDelete}
-                  onClick={() => handleDelete(meal, recepie)}
+                  onClick={() => handleDelete(meal, recipe)}
                 ></ButtonIconSmall>
               )}
-              <div>{recepie.title}</div>
+              <div>{recipe.title}</div>
             </li>
           ))}
         </ul>

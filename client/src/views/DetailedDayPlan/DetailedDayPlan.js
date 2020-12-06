@@ -5,14 +5,15 @@ import UserPageTemplate from "../../templates/UserPageTemplate/UserPageTemplate"
 import Heading from "../../components/atoms/Heading/Heading";
 import Paragraph from "../../components/atoms/Paragraph/Paragraph";
 import ButtonIconSmall from "../../components/atoms/ButtonIconSmall/ButtonIconSmall";
-import RecepieCard from "../../components/molecules/RecepieCard/RecepieCard";
+import RecipeCard from "../../components/molecules/RecipeCard/RecipeCard";
 import { PlanContext } from "../../context/PlanContext";
-import { useHistory, useLocation } from "react-router";
+import { useHistory, useLocation, Redirect } from "react-router";
 import { meals } from "../../constans/index";
 import AddPlan from "../../components/organisms/AddPlan/AddPlan";
 import PopUpDelete from "../../components/molecules/PopUpDelete/PopUpDelete";
 import QuickAdd from "../../components/molecules/QuickAdd/QuickAdd";
 import PlanContextProvider from "../../context/PlanContext";
+import { GlobalContext } from "../../context/GlobalContext";
 
 const DetailedDayPlan = () => {
   const {
@@ -23,13 +24,13 @@ const DetailedDayPlan = () => {
     planToEdit,
     deletePlan,
   } = useContext(PlanContext);
-
+  const { userLoggedIn } = useContext(GlobalContext);
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const history = useHistory();
   const [isOpenDelete, setOpenDelete] = useState(false);
   const [isOpenQuickAdd, setOpenQuickAdd] = useState(false);
-  const [activeRecepie, setActiveRecepie] = useState({});
+  const [activeRecipe, setActiveRecipe] = useState({});
   const [refresh, setRefresh] = useState(false);
 
   const handleToggleDeletePopUp = () => {
@@ -42,7 +43,7 @@ const DetailedDayPlan = () => {
 
   const handleQuickAdd = (item) => {
     setOpenQuickAdd(!isOpenQuickAdd);
-    setActiveRecepie(item);
+    setActiveRecipe(item);
   };
 
   const handleDeletePlan = () => {
@@ -50,6 +51,10 @@ const DetailedDayPlan = () => {
     setOpenDelete(!isOpenDelete);
     history.push("/plan");
   };
+
+  if (userLoggedIn === false) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <ToggleOpen
@@ -94,10 +99,10 @@ const DetailedDayPlan = () => {
                       <div key={meal} className={styles.mealPlanWrapper}>
                         <h2>{meal}</h2>
                         <div className={styles.recepiesContainer}>
-                          {dayPlan.plan[meal].map((recepie) => (
-                            <div key={`${meal}-${recepie._id}`}>
-                              <RecepieCard
-                                item={recepie}
+                          {dayPlan.plan[meal].map((recipe) => (
+                            <div key={`${meal}-${recipe._id}`}>
+                              <RecipeCard
+                                item={recipe}
                                 handleQuickAdd={handleQuickAdd}
                               />
                             </div>
@@ -119,7 +124,7 @@ const DetailedDayPlan = () => {
           {isOpenQuickAdd && (
             <PlanContextProvider>
               <QuickAdd
-                item={activeRecepie}
+                item={activeRecipe}
                 setOpen={setOpenQuickAdd}
                 custom={styles.quickAdd}
               />

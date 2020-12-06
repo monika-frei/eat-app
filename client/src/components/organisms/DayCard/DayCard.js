@@ -16,7 +16,7 @@ const DayCard = ({ day, plan = [], date, planId }) => {
         </Link>
       </div>
       {meals.map((meal, index) => (
-        <Card key={index} meal={meal} savedRecepies={plan ? plan[meal] : []} />
+        <Card key={index} meal={meal} savedRecipes={plan ? plan[meal] : []} />
       ))}
     </section>
   );

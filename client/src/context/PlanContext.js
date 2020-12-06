@@ -47,11 +47,11 @@ const PlanContextProvider = (props) => {
       });
   };
 
-  const savePlan = (date, day, savedRecepies) => {
+  const savePlan = (date, day, savedRecipes) => {
     const dayPlan = {
       day,
       date,
-      recepies: savedRecepies,
+      recipes: savedRecipes,
       userData: {
         userId,
       },
@@ -88,19 +88,19 @@ const PlanContextProvider = (props) => {
       });
   };
 
-  const addRecepieToPlan = (date, meal, recepie) => {
+  const addRecipeToPlan = (date, meal, recipe) => {
     const formatDate = moment(date).format("YYYY-MM-DD");
     if (plan.filter((item) => item.date === formatDate).length === 0) {
-      let savedRecepies = {
+      let savedRecipes = {
         breakfast: [],
         lunch: [],
         dinner: [],
         snacks: [],
       };
-      savedRecepies[meal] = [...savedRecepies[meal], recepie];
+      savedRecipes[meal] = [...savedRecipes[meal], recipe];
       const day = moment(date).format("dddd");
 
-      savePlan(formatDate, day, savedRecepies);
+      savePlan(formatDate, day, savedRecipes);
     } else {
       const [planToUpdate] = plan.filter((item) => {
         if (item.date === formatDate) {
@@ -108,19 +108,19 @@ const PlanContextProvider = (props) => {
         }
       });
       const checkRepetition = planToUpdate.plan[meal].filter((item) => {
-        if (item._id === recepie._id) {
+        if (item._id === recipe._id) {
           return item;
         }
       });
       if (planToUpdate && checkRepetition.length === 0) {
-        planToUpdate.plan[meal] = [...planToUpdate.plan[meal], recepie];
+        planToUpdate.plan[meal] = [...planToUpdate.plan[meal], recipe];
         updatePlan(planToUpdate._id, planToUpdate);
       }
     }
   };
-  const sendPlan = (date, day, savedRecepies) => {
+  const sendPlan = (date, day, savedRecipes) => {
     if (plan.filter((item) => item.date === date).length === 0) {
-      savePlan(date, day, savedRecepies);
+      savePlan(date, day, savedRecipes);
     } else {
       const [planInDb] = plan.filter((item) => {
         if (item.date === date) {
@@ -130,7 +130,7 @@ const PlanContextProvider = (props) => {
       const planToUpdate = {
         date,
         day,
-        plan: savedRecepies,
+        plan: savedRecipes,
       };
       if (planToUpdate) {
         updatePlan(planInDb._id, planToUpdate);
@@ -149,7 +149,7 @@ const PlanContextProvider = (props) => {
         planToEdit,
         setPlanToEdit,
         updatePlan,
-        addRecepieToPlan,
+        addRecipeToPlan,
       }}
     >
       {props.children}

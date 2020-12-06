@@ -14,13 +14,13 @@ const FormAddTemplate = ({ children, classOpen, toggle, clearForm }) => {
         <div className={containerClass}>
           <Heading custom={styles.heading}>
             {type === pageType.plan && "Plan your meals"}
-            {type === pageType.recepies && "Add a recepie"}
+            {type === pageType.recipes && "Add a recipe"}
           </Heading>
           {children}
           <ButtonIconSmall
             bgImage="buttonDelete"
             btnSize="btn20"
-            custom={styles.delete}
+            custom={styles.close}
             onClick={() => {
               toggle(false);
             }}

@@ -6,6 +6,10 @@ import { NavLink } from "react-router-dom";
 
 const HamburgerMenu = ({ menuItems }) => {
   const [open, setOpen] = useState(false);
+  const handleLogOut = () => {
+    window.location.reload();
+    return false;
+  };
   const handleClick = () => {
     setOpen(!open);
   };
@@ -30,19 +34,38 @@ const HamburgerMenu = ({ menuItems }) => {
                   className={styles.itemWrapper}
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <NavLink to={`/${item.replace(" ", "").toLowerCase()}`}>
-                    <div
-                      className={styles.menuItem}
-                      style={{ animationDelay: `${index * 0.1}s` }}
-                      onClick={() => handleLinkClick()}
-                    >
-                      {item}
-                    </div>
-                  </NavLink>
-                  <div
-                    className={styles.line}
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  />
+                  {item === "Log Out" && (
+                    <>
+                      <div
+                        className={styles.menuItem}
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                        onClick={handleLogOut}
+                      >
+                        {item}
+                      </div>
+                      <div
+                        className={styles.line}
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                      />
+                    </>
+                  )}
+                  {item !== "Log Out" && (
+                    <>
+                      <NavLink to={`/${item.replace(" ", "").toLowerCase()}`}>
+                        <div
+                          className={styles.menuItem}
+                          style={{ animationDelay: `${index * 0.1}s` }}
+                          onClick={() => handleLinkClick()}
+                        >
+                          {item}
+                        </div>
+                      </NavLink>
+                      <div
+                        className={styles.line}
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                      />
+                    </>
+                  )}
                 </div>
               </div>
             );

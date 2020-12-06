@@ -5,7 +5,7 @@ const PageType = (props) => {
   const [type, setType] = useState("plan");
 
   const setCurrentPage = () => {
-    const pageTypes = ["plan", "recepies", "grocerylist", "signup", "login"];
+    const pageTypes = ["plan", "recipes", "grocerylist", "signup", "login"];
     const {
       location: { pathname },
     } = props;
