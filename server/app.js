@@ -50,5 +50,7 @@ app.use((error, req, res, next) => {
     },
   });
 });
+app.get('/', (req, res) => { res.send('Hello from Express!')
+
 
 module.exports = app;
